@@ -1,0 +1,63 @@
+default_scheme: default
+
+schemes:
+  android:
+    - name: dev
+#      release_status: draft # Valid values are completed, draft, halted, inProgress
+#      track: internal # Default available tracks are: production, beta, alpha, internal. Default value is production
+
+    - name: prod
+#      release_status: draft # Valid values are completed, draft, halted, inProgress
+#      track: internal # Default available tracks are: production, beta, alpha, internal. Default value is production
+
+  ios:
+    - name: dev
+      scheme_name: dev # # Xcode - Manage Schemes
+      target_name: Runner # You can change the name of the Runner if you have more than one in Xcode
+      export_method: app-store # Valid values are: app-store, validation, ad-hoc, package, enterprise, development, developer-id and mac-application
+      workspace: Runner.xcworkspace
+      manual_codesign: false # Be sure to select your preferred signature method in Xcode - Signing & Capabilities
+#      provisioning_profile:
+#        bundle_id: com.onix.flutter.firebase.auth.test.test_prj_ivan.dev # If manual_codesign: true, be sure to specify the bundle_id and the name of the profile's provisions
+#        name: PROVISIONING_PROFILE_NAME # If manual_codesign: true, be sure to specify the bundle_id and the name of the profile's provisions
+
+    - name: prod
+      scheme_name: prod # # Xcode - Manage Schemes
+      target_name: Runner # You can change the name of the Runner if you have more than one in Xcode
+      export_method: app-store # Valid values are: app-store, validation, ad-hoc, package, enterprise, development, developer-id and mac-application
+      workspace: Runner.xcworkspace
+      manual_codesign: false # Be sure to select your preferred signature method in Xcode - Signing & Capabilities
+#      provisioning_profile:
+#        bundle_id: com.onix.flutter.firebase.auth.test.test_prj_ivan # If manual_codesign: true, be sure to specify the bundle_id and the name of the profile's provisions
+#        name: PROVISIONING_PROFILE_NAME # If manual_codesign: true, be sure to specify the bundle_id and the name of the profile's provisions
+
+firebase:
+  android:
+    - name: dev
+#      release_notes_file: ../release_notes.txt # Relative path to the file
+#      testers: TESTERS_COMMAS_STRING # Comma-separated list
+#      groups: GROUPS_COMMAS_STRING # Comma-separated list
+#      deploy_apk_only: true # deploy_apk_only: true is used if firebase is not integrated with play Console
+
+    - name: prod
+#      release_notes_file: ../release_notes.txt # Relative path to the file
+#      testers: TESTERS_COMMAS_STRING # Comma-separated list
+#      groups: GROUPS_COMMAS_STRING # Comma-separated list
+#      deploy_apk_only: true # deploy_apk_only: true is used if firebase is not integrated with play Console
+
+  ios:
+    - name: dev
+#      release_notes_file: ../release_notes.txt # Relative path to the file
+#      testers: TESTERS_COMMAS_STRING # Comma-separated list
+#      groups: GROUPS_COMMAS_STRING # Comma-separated list
+
+    - name: prod
+#      release_notes_file: ../release_notes.txt # Relative path to the file
+#      testers: TESTERS_COMMAS_STRING # Comma-separated list
+#      groups: GROUPS_COMMAS_STRING # Comma-separated list
+
+slack: # Don't forget to specify a SLACK_URL in the .env for each flavor in the fastlane directory for each platform
+  username: Fastlane
+  send_when_error: false
+#   pretext: STRING
+#   icon_url: STRING_URL

@@ -1,0 +1,37 @@
+{
+  "branch": "feat/update_28",
+  "localVersion": "1.1.3",
+  "remoteVersion": "1.1.2",
+  "projectPath": "/Users/coloud/Desktop/projects",
+  "projectName": "test_prj_ivan",
+  "projectExists": false,
+  "organization": "com.onix.flutter.firebase.auth.test",
+  "platformsList": {
+    "android": true,
+    "ios": true,
+    "web": false,
+    "macos": false,
+    "windows": false,
+    "linux": false
+  },
+  "flavorize": true,
+  "flavors": "",
+  "generateSigningKey": true,
+  "firebaseAuth": false,
+  "useSonar": false,
+  "graphql": false,
+  "router": "goRouter",
+  "localization": "intl",
+  "theming": "themeTailor",
+  "signingVars": [
+    "Your Name",
+    "Department",
+    "Your Company",
+    "Your City",
+    "Your State or Province",
+    "UA",
+    ""
+  ],
+  "screens": [],
+  "swaggerUrl": ""
+}

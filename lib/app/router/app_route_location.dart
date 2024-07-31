@@ -1,0 +1,4 @@
+enum AppRouteLocation {
+  auth,
+  securedApp,
+}
