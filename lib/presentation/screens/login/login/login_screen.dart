@@ -12,6 +12,7 @@ import 'package:test_prj_ivan/presentation/screens/login/login/bloc/login_bloc.d
 import 'package:test_prj_ivan/presentation/screens/login/login/bloc/login_bloc_models.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_textfield/custom_textfield.dart';
+import 'package:test_prj_ivan/presentation/widgets/form_column.dart';
 import 'package:test_prj_ivan/presentation/widgets/scaffold_wrapper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,59 +44,57 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
   @override
   Widget buildWidget(BuildContext context) {
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Login Screen'),
+      appBar: const CustomAppBar(title: 'Login'),
       maintainBottomViewPadding: true,
       safeArea: (top: true, bottom: true),
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      body: Form(
+      body: FormColumn(
         key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            CustomTextField(
-              controller: _emailController,
-              hintText: 'Email',
-              keyboardType: TextInputType.emailAddress,
-              validator: (email) => _emailValidator.validate(
-                context,
-                value: email,
-              ),
-              textInputAction: TextInputAction.next,
+        children: [
+          const SizedBox(height: 40),
+          CustomTextField(
+            controller: _emailController,
+            hintText: 'Email',
+            keyboardType: TextInputType.emailAddress,
+            validator: (email) => _emailValidator.validate(
+              context,
+              value: email,
             ),
-            const SizedBox(height: 30),
-            CustomTextField(
-              controller: _passwordController,
-              hintText: 'Password',
-              useObscure: true,
-              keyboardType: TextInputType.visiblePassword,
-              validator: (password) => _passwordValidator.validate(
-                context,
-                value: password,
-              ),
+            textInputAction: TextInputAction.next,
+          ),
+          const SizedBox(height: 30),
+          CustomTextField(
+            controller: _passwordController,
+            hintText: 'Password',
+            useObscure: true,
+            keyboardType: TextInputType.visiblePassword,
+            validator: (password) => _passwordValidator.validate(
+              context,
+              value: password,
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () => _onLogin(context),
-              child: const Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () => _onRegistration(context),
-              child: const Text('Create account'),
-            ),
-            ElevatedButton(
-              onPressed: () => _loginWithAppleId(context),
-              child: const Text('Apple Id'),
-            ),
-            ElevatedButton(
-              onPressed: () => _loginWithGoogle(context),
-              child: const Text('Google'),
-            ),
-            ElevatedButton(
-              onPressed: () => _loginWithGithub(context),
-              child: const Text('Github'),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () => _onLogin(context),
+            child: const Text('Login'),
+          ),
+          ElevatedButton(
+            onPressed: () => _onRegistration(context),
+            child: const Text('Create account'),
+          ),
+          ElevatedButton(
+            onPressed: () => _loginWithAppleId(context),
+            child: const Text('Apple Id'),
+          ),
+          ElevatedButton(
+            onPressed: () => _loginWithGoogle(context),
+            child: const Text('Google'),
+          ),
+          ElevatedButton(
+            onPressed: () => _loginWithGithub(context),
+            child: const Text('Github'),
+          ),
+        ],
       ),
     );
   }
