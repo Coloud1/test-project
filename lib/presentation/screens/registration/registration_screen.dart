@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
+import 'package:test_prj_ivan/app/util/firebase_auth_dialog_util.dart';
 import 'package:test_prj_ivan/app/util/validators/password/email_validator.dart';
 import 'package:test_prj_ivan/app/util/validators/password/password_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_block_state.dart';
+import 'package:test_prj_ivan/core/arch/domain/entity/failure/failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/usecase/create_account_with_credentials_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/bloc/registration_bloc_imports.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
@@ -35,12 +39,13 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
   void onBlocCreated(BuildContext context, RegistrationBloc bloc) {
     super.onBlocCreated(context, bloc);
     bloc.singleResults.listen((sr) => _onSR(context, sr));
+    bloc.failureStream.listen((failure) => _onFailure(context, failure));
   }
 
   @override
   Widget buildWidget(BuildContext context) {
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Registration'),
+      appBar: CustomAppBar(title: context.tr.registrationAppBarTitle),
       safeArea: (top: true, bottom: true),
       maintainBottomViewPadding: true,
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -50,7 +55,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
           const SizedBox(height: 40),
           CustomTextField(
             controller: _emailController,
-            hintText: 'Email',
+            hintText: context.tr.registrationEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (email) => _emailValidator.validate(
@@ -62,7 +67,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
           CustomTextField(
             useObscure: true,
             controller: _passwordController,
-            hintText: 'Password',
+            hintText: context.tr.registrationPasswordFieldLabel,
             keyboardType: TextInputType.visiblePassword,
             validator: (password) => _passwordValidator.validate(
               context,
@@ -72,7 +77,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
           const SizedBox(height: 40),
           ElevatedButton(
             onPressed: () => _onCreateAccount(context),
-            child: const Text('Create account'),
+            child: Text(context.tr.registrationCreateAccountButtonLabel),
           ),
         ],
       ),
@@ -87,15 +92,23 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
   }
 
   void _onCreateAccount(BuildContext context) {
-    blocOf(context).add(
-      RegistrationBlocEvent.signUpWithCredentials(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ),
-    );
+    if (_formKey.currentState?.validate() ?? false) {
+      blocOf(context).add(
+        RegistrationBlocEvent.signUpWithCredentials(
+          email: _emailController.text,
+          password: _passwordController.text,
+        ),
+      );
+    }
   }
 
   void _onSR(BuildContext context, RegistrationBlocSR sr) {
     sr.when(navigateToLogin: () => context.pop());
+  }
+
+  void _onFailure(BuildContext context, Failure failure) {
+    if (failure is FirebaseAuthFailure) {
+      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
+    }
   }
 }

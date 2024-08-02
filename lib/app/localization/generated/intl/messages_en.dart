@@ -31,33 +31,36 @@ class MessageLookup extends MessageLookupByLibrary {
         "apiFailureUndefined": MessageLookupByLibrary.simpleMessage(
             "Uh oh! Looks like we ran into an issue while processing this request. Please try again.\n\nReach out to support if you continue to experience issues."),
         "appName": MessageLookupByLibrary.simpleMessage("Arch Sample"),
-        "commonImageEditor":
-            MessageLookupByLibrary.simpleMessage("Image editor"),
-        "errorEmail": MessageLookupByLibrary.simpleMessage("Email not valid"),
-        "errorEmptyField": MessageLookupByLibrary.simpleMessage("Empty Field"),
-        "errorPasswordLetters": MessageLookupByLibrary.simpleMessage(
-            "Password should contain letters"),
-        "errorPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
-            "Password and confirm password not match"),
-        "errorPasswordNumeral": MessageLookupByLibrary.simpleMessage(
-            "Password should contain at least one number"),
-        "errorPasswordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
-            "Password must contain at least one special character: !@#\$%^&*()?<>"),
-        "errorPasswordToLong": MessageLookupByLibrary.simpleMessage(
-            "Password too long, should be less 20 characters"),
-        "errorPasswordToShort": MessageLookupByLibrary.simpleMessage(
-            "Password too short, should be 8 or more characters"),
-        "imageSource": MessageLookupByLibrary.simpleMessage("Select source"),
-        "imageSourceCancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "imageSourceImageCameraBtn":
-            MessageLookupByLibrary.simpleMessage("Camera photo"),
-        "imageSourceImageGalleryBtn":
-            MessageLookupByLibrary.simpleMessage("Gallery photo"),
-        "imageSourceVideoCameraBtn":
-            MessageLookupByLibrary.simpleMessage("Camera video"),
-        "imageSourceVideoGalleryBtn":
-            MessageLookupByLibrary.simpleMessage("Gallery video"),
-        "title": MessageLookupByLibrary.simpleMessage("Arch Sample"),
-        "undefinedData": MessageLookupByLibrary.simpleMessage("N/A")
+        "firebaseAuthInvalidCredentialsFailure":
+            MessageLookupByLibrary.simpleMessage(
+                "Could not log in with provided credentials"),
+        "generalErrorTitleOopsSomethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Oops! Something went wrong"),
+        "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Home"),
+        "homeLogOutButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Log out"),
+        "loginAppBarTitle": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginAppleIdButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Apple Id"),
+        "loginCreateAccountButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Create account"),
+        "loginCredentialsButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Login"),
+        "loginEmailFieldLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "loginGithubButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Github"),
+        "loginGoogleButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Google"),
+        "loginPasswordFieldLabel":
+            MessageLookupByLibrary.simpleMessage("Password"),
+        "registrationAppBarTitle":
+            MessageLookupByLibrary.simpleMessage("Registration"),
+        "registrationCreateAccountButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Create account"),
+        "registrationEmailFieldLabel":
+            MessageLookupByLibrary.simpleMessage("Email"),
+        "registrationPasswordFieldLabel":
+            MessageLookupByLibrary.simpleMessage("Password"),
+        "title": MessageLookupByLibrary.simpleMessage("Arch Sample")
       };
 }

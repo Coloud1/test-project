@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_prj_ivan/app/router/app_router.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
+import 'package:test_prj_ivan/app/util/firebase_auth_dialog_util.dart';
 import 'package:test_prj_ivan/app/util/validators/password/email_validator.dart';
 import 'package:test_prj_ivan/app/util/validators/password/password_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_block_state.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/failure/failure.dart';
-import 'package:test_prj_ivan/domain/entity/failure/registration_failure/registration_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/usecase/make_login_with_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/bloc/login_bloc.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/bloc/login_bloc_models.dart';
@@ -44,7 +46,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
   @override
   Widget buildWidget(BuildContext context) {
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Login'),
+      appBar: CustomAppBar(title: context.tr.loginAppBarTitle),
       maintainBottomViewPadding: true,
       safeArea: (top: true, bottom: true),
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -54,7 +56,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
           const SizedBox(height: 40),
           CustomTextField(
             controller: _emailController,
-            hintText: 'Email',
+            hintText: context.tr.loginEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,
             validator: (email) => _emailValidator.validate(
               context,
@@ -65,7 +67,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
           const SizedBox(height: 30),
           CustomTextField(
             controller: _passwordController,
-            hintText: 'Password',
+            hintText: context.tr.loginPasswordFieldLabel,
             useObscure: true,
             keyboardType: TextInputType.visiblePassword,
             validator: (password) => _passwordValidator.validate(
@@ -76,23 +78,23 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
           const SizedBox(height: 30),
           ElevatedButton(
             onPressed: () => _onLogin(context),
-            child: const Text('Login'),
+            child: Text(context.tr.loginCredentialsButtonLabel),
           ),
           ElevatedButton(
             onPressed: () => _onRegistration(context),
-            child: const Text('Create account'),
+            child: Text(context.tr.loginCreateAccountButtonLabel),
           ),
           ElevatedButton(
             onPressed: () => _loginWithAppleId(context),
-            child: const Text('Apple Id'),
+            child: Text(context.tr.loginAppleIdButtonLabel),
           ),
           ElevatedButton(
             onPressed: () => _loginWithGoogle(context),
-            child: const Text('Google'),
+            child: Text(context.tr.loginGoogleButtonLabel),
           ),
           ElevatedButton(
             onPressed: () => _loginWithGithub(context),
-            child: const Text('Github'),
+            child: Text(context.tr.loginGithubButtonLabel),
           ),
         ],
       ),
@@ -134,13 +136,8 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
   }
 
   void _onFailure(BuildContext context, Failure failure) {
-    if (failure is FirebaseFailure) {
-      showDialog(
-        context: context,
-        builder: (context) => Dialog(
-          child: Text('Error $failure'),
-        ),
-      );
+    if (failure is FirebaseAuthFailure) {
+      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
     }
   }
 }

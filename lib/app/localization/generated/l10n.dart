@@ -70,166 +70,6 @@ class S {
     );
   }
 
-  /// `N/A`
-  String get undefinedData {
-    return Intl.message(
-      'N/A',
-      name: 'undefinedData',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Image editor`
-  String get commonImageEditor {
-    return Intl.message(
-      'Image editor',
-      name: 'commonImageEditor',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select source`
-  String get imageSource {
-    return Intl.message(
-      'Select source',
-      name: 'imageSource',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Gallery video`
-  String get imageSourceVideoGalleryBtn {
-    return Intl.message(
-      'Gallery video',
-      name: 'imageSourceVideoGalleryBtn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Camera video`
-  String get imageSourceVideoCameraBtn {
-    return Intl.message(
-      'Camera video',
-      name: 'imageSourceVideoCameraBtn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Gallery photo`
-  String get imageSourceImageGalleryBtn {
-    return Intl.message(
-      'Gallery photo',
-      name: 'imageSourceImageGalleryBtn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Camera photo`
-  String get imageSourceImageCameraBtn {
-    return Intl.message(
-      'Camera photo',
-      name: 'imageSourceImageCameraBtn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cancel`
-  String get imageSourceCancelBtn {
-    return Intl.message(
-      'Cancel',
-      name: 'imageSourceCancelBtn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Empty Field`
-  String get errorEmptyField {
-    return Intl.message(
-      'Empty Field',
-      name: 'errorEmptyField',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email not valid`
-  String get errorEmail {
-    return Intl.message(
-      'Email not valid',
-      name: 'errorEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password too short, should be 8 or more characters`
-  String get errorPasswordToShort {
-    return Intl.message(
-      'Password too short, should be 8 or more characters',
-      name: 'errorPasswordToShort',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password too long, should be less 20 characters`
-  String get errorPasswordToLong {
-    return Intl.message(
-      'Password too long, should be less 20 characters',
-      name: 'errorPasswordToLong',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password must contain at least one special character: !@#$%^&*()?<>`
-  String get errorPasswordSpecialCharacter {
-    return Intl.message(
-      'Password must contain at least one special character: !@#\$%^&*()?<>',
-      name: 'errorPasswordSpecialCharacter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password should contain letters`
-  String get errorPasswordLetters {
-    return Intl.message(
-      'Password should contain letters',
-      name: 'errorPasswordLetters',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password should contain at least one number`
-  String get errorPasswordNumeral {
-    return Intl.message(
-      'Password should contain at least one number',
-      name: 'errorPasswordNumeral',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password and confirm password not match`
-  String get errorPasswordNotMatch {
-    return Intl.message(
-      'Password and confirm password not match',
-      name: 'errorPasswordNotMatch',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Sorry, we're having trouble connecting. Please check your internet connection and try again.\n\nReach out to support if you continue to experience issues.`
   String get apiFailureNoNetwork {
     return Intl.message(
@@ -265,6 +105,166 @@ class S {
     return Intl.message(
       'Uh oh! Looks like we ran into an issue while processing this request. Please try again.\n\nReach out to support if you continue to experience issues.',
       name: 'apiFailureUndefined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginAppBarTitle {
+    return Intl.message(
+      'Login',
+      name: 'loginAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get loginEmailFieldLabel {
+    return Intl.message(
+      'Email',
+      name: 'loginEmailFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get loginPasswordFieldLabel {
+    return Intl.message(
+      'Password',
+      name: 'loginPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginCredentialsButtonLabel {
+    return Intl.message(
+      'Login',
+      name: 'loginCredentialsButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account`
+  String get loginCreateAccountButtonLabel {
+    return Intl.message(
+      'Create account',
+      name: 'loginCreateAccountButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apple Id`
+  String get loginAppleIdButtonLabel {
+    return Intl.message(
+      'Apple Id',
+      name: 'loginAppleIdButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google`
+  String get loginGoogleButtonLabel {
+    return Intl.message(
+      'Google',
+      name: 'loginGoogleButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Github`
+  String get loginGithubButtonLabel {
+    return Intl.message(
+      'Github',
+      name: 'loginGithubButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration`
+  String get registrationAppBarTitle {
+    return Intl.message(
+      'Registration',
+      name: 'registrationAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get registrationEmailFieldLabel {
+    return Intl.message(
+      'Email',
+      name: 'registrationEmailFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get registrationPasswordFieldLabel {
+    return Intl.message(
+      'Password',
+      name: 'registrationPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account`
+  String get registrationCreateAccountButtonLabel {
+    return Intl.message(
+      'Create account',
+      name: 'registrationCreateAccountButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeAppBarTitle {
+    return Intl.message(
+      'Home',
+      name: 'homeAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get homeLogOutButtonLabel {
+    return Intl.message(
+      'Log out',
+      name: 'homeLogOutButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not log in with provided credentials`
+  String get firebaseAuthInvalidCredentialsFailure {
+    return Intl.message(
+      'Could not log in with provided credentials',
+      name: 'firebaseAuthInvalidCredentialsFailure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! Something went wrong`
+  String get generalErrorTitleOopsSomethingWentWrong {
+    return Intl.message(
+      'Oops! Something went wrong',
+      name: 'generalErrorTitleOopsSomethingWentWrong',
       desc: '',
       args: [],
     );
