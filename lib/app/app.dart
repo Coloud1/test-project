@@ -2,11 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import 'package:test_prj_ivan/app/bloc/app_bloc_imports.dart';
 import 'package:test_prj_ivan/app/localization/generated/l10n.dart';
 import 'package:test_prj_ivan/app/router/app_router.dart';
@@ -25,8 +23,13 @@ class _AppState extends BaseState<AppScreenState, AppBloc, AppSR, App> {
   Locale? locale;
 
   @override
-  Widget buildWidget(BuildContext context) {
+  void initState() {
+    super.initState();
     AppRouter.init();
+  }
+
+  @override
+  Widget buildWidget(BuildContext context) {
     return GlobalLoaderOverlay(
       overlayColor: Colors.black.withOpacity(0.5),
       child: ScreenUtilInit(

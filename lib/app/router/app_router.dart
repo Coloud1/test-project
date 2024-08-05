@@ -1,8 +1,12 @@
 //@formatter:off
 
 import 'package:go_router/go_router.dart';
+import 'package:test_prj_ivan/app/service/session_service/session_status.dart';
+import 'package:test_prj_ivan/core/di/services.dart';
 import 'package:test_prj_ivan/presentation/screens/home/home_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/login_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/phone/enter_phone/enter_phone_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/phone_otp_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/registration_screen.dart';
 
 //{imports end}
@@ -10,10 +14,16 @@ import 'package:test_prj_ivan/presentation/screens/registration/registration_scr
 class AppRouter {
   static const _initialLocation = _loginPath;
   static const String _loginPath = '/login';
+  static const String loginRoute = 'loginRoute';
+  static const String _loginPhonePath = 'phone';
+  static const String loginPhoneRoute = 'phoneRoute';
+  static const String _loginPhoneOtpPath = 'phone-otp';
+  static const String loginPhoneOtpRoute = 'phoneOtpRoute';
+
   static const String _registrationPath = 'registration';
+  static const String registrationRoute = 'registrationRoute';
+
   static const String _homePath = '/home';
-  static const String loginRoute = 'login';
-  static const String registrationRoute = 'registrationName';
   static const String homeRoute = 'home';
 
   static final AppRouter _instance = AppRouter._privateConstructor();
@@ -30,10 +40,27 @@ class AppRouter {
   void _initialize({String initialLocation = _initialLocation}) {
     router = GoRouter(
       initialLocation: initialLocation,
-      // refreshListenable: sessionService(),
-      // redirect: (context, state) {
-      //   return null;
-      // },
+      refreshListenable: sessionService(),
+      redirect: (context, state) {
+        final session = sessionService();
+
+        if (session.sessionStatus == SessionStatus.open) {
+          if (state.matchedLocation.startsWith(_homePath)) {
+            return null;
+          } else {
+            return _homePath;
+          }
+        } else {
+          if (state.matchedLocation.startsWith(_loginPath) ||
+              state.matchedLocation.startsWith(_registrationPath) ||
+              state.matchedLocation.startsWith(_loginPhonePath) ||
+              state.matchedLocation.startsWith(_loginPhoneOtpPath)) {
+            return null;
+          } else {
+            return _loginPath;
+          }
+        }
+      },
       routes: <GoRoute>[
         GoRoute(
           path: _loginPath,
@@ -44,6 +71,16 @@ class AppRouter {
               path: _registrationPath,
               name: registrationRoute,
               builder: (context, state) => const RegistrationScreen(),
+            ),
+            GoRoute(
+              path: _loginPhonePath,
+              name: loginPhoneRoute,
+              builder: (context, state) => const EnterPhoneScreen(),
+            ),
+            GoRoute(
+              path: _loginPhoneOtpPath,
+              name: loginPhoneOtpRoute,
+              builder: (context, state) => const PhoneOtpScreen(),
             ),
           ],
         ),

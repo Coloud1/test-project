@@ -35,9 +35,7 @@ class RegistrationBloc extends BaseBloc<RegistrationBlocEvent,
       success: (_) {
         addSr(const RegistrationBlocSR.navigateToLogin());
       },
-      error: (failure) {
-        onFailure(failure);
-      },
+      error: onFailure,
     );
 
     await hideProgress();

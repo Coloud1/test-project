@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test_prj_ivan/app/util/firebase_auth_exception_mapper.dart';
+import 'package:test_prj_ivan/app/util/map_firebase_auth_exception.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/core/arch/logger/app_logger_impl.dart';
@@ -26,7 +26,7 @@ class LoginRepositoryImpl implements LoginRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signInWithEmail');
       return Result.error(
-        failure: FirebaseAuthExceptionMapper.mapRawStringToFailure(e),
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));
@@ -41,7 +41,7 @@ class LoginRepositoryImpl implements LoginRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signInWithGoogle');
       return Result.error(
-        failure: FirebaseAuthExceptionMapper.mapRawStringToFailure(e),
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));
@@ -56,7 +56,7 @@ class LoginRepositoryImpl implements LoginRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signInWithApple');
       return Result.error(
-        failure: FirebaseAuthExceptionMapper.mapRawStringToFailure(e),
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));
@@ -77,7 +77,7 @@ class LoginRepositoryImpl implements LoginRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signInWithGithub');
       return Result.error(
-        failure: FirebaseAuthExceptionMapper.mapRawStringToFailure(e),
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));

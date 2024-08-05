@@ -4,9 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:test_prj_ivan/app/app.dart';
 import 'package:test_prj_ivan/app/app_initialization.dart';
 import 'package:test_prj_ivan/app/banned_app.dart';
@@ -21,9 +19,7 @@ Future<void> mainApp() async {
       () async {
         WidgetsFlutterBinding.ensureInitialized();
         await Initialization.I.initApp();
-
         await OrientationExtension.lockVertical();
-
         Bloc.observer = AppBlocObserver();
         final isAllowedToUseApp = await environmentService().initialize();
         if (isAllowedToUseApp) {
