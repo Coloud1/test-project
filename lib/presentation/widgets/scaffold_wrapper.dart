@@ -9,6 +9,7 @@ class ScaffoldWrapper extends StatelessWidget {
   final ScaffoldSafeArea safeArea;
   final bool? resizeToAvoidBottomInset;
   final bool maintainBottomViewPadding;
+  final bool extendBodyBehindAppBar;
 
   const ScaffoldWrapper({
     required this.body,
@@ -17,6 +18,7 @@ class ScaffoldWrapper extends StatelessWidget {
     this.safeArea = (top: false, bottom: false),
     this.resizeToAvoidBottomInset,
     this.maintainBottomViewPadding = false,
+    this.extendBodyBehindAppBar = false,
     super.key,
   });
 
@@ -44,6 +46,8 @@ class ScaffoldWrapper extends StatelessWidget {
       appBar: appBar,
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
     );
   }
 }

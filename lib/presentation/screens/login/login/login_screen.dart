@@ -98,7 +98,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
           ),
           ElevatedButton(
             onPressed: () => _loginWithPhone(context),
-            child: Text('Phone'),
+            child: const Text('Phone'),
           ),
         ],
       ),

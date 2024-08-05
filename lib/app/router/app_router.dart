@@ -5,8 +5,8 @@ import 'package:test_prj_ivan/app/service/session_service/session_status.dart';
 import 'package:test_prj_ivan/core/di/services.dart';
 import 'package:test_prj_ivan/presentation/screens/home/home_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/login_screen.dart';
-import 'package:test_prj_ivan/presentation/screens/phone/enter_phone/enter_phone_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/phone_otp_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/phone/phone_screen/phone_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/registration_screen.dart';
 
 //{imports end}
@@ -75,7 +75,7 @@ class AppRouter {
             GoRoute(
               path: _loginPhonePath,
               name: loginPhoneRoute,
-              builder: (context, state) => const EnterPhoneScreen(),
+              builder: (context, state) => const PhoneScreen(),
             ),
             GoRoute(
               path: _loginPhoneOtpPath,
