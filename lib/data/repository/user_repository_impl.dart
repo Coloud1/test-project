@@ -5,6 +5,7 @@ import 'package:test_prj_ivan/app/util/map_firebase_auth_exception.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/core/arch/logger/app_logger_impl.dart';
+import 'package:test_prj_ivan/data/mapper/user/user_mapper.dart';
 import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/entity/failure/general/unknown_failure.dart';
 import 'package:test_prj_ivan/domain/entity/failure/user_failure/user_failure.dart';
@@ -22,21 +23,17 @@ class UserRepositoryImpl implements UserRepository {
   late final Stream<UserChanges> _innerStream;
 
   @override
-  Stream<UserChanges> get listen => _innerStream;
+  Stream<UserChanges> get stream => _innerStream;
 
   void _initListener() {
     _innerStream = _auth.userChanges().map<UserChanges>((user) {
+      print(user?.providerData);
+      print(user?.metadata);
       if (user == null) {
         return const AuthorizedUserSignedOut();
       } else {
         return AuthorizedUserChanged(
-          user: UserEntity(
-            providerId: '',
-            displayName: user.displayName ?? '',
-            email: user.email ?? '',
-            photoURL: user.photoURL ?? '',
-            uid: user.uid,
-          ),
+          user: UserMapper.mapFirebaseUserToUserEntity(user),
         );
       }
     });
@@ -46,20 +43,10 @@ class UserRepositoryImpl implements UserRepository {
   Future<Result<UserEntity>> getUser() async {
     try {
       final user = _auth.currentUser;
-
       if (user == null) {
         return const Result.error(failure: UserSignedOutFailure());
       }
-
-      return Result.success(
-        UserEntity(
-          providerId: '',
-          displayName: user.displayName ?? '',
-          email: user.email ?? '',
-          photoURL: user.photoURL ?? '',
-          uid: user.uid,
-        ),
-      );
+      return Result.success(UserMapper.mapFirebaseUserToUserEntity(user));
     } on FirebaseException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'getUser');
       return Result.error(failure: UnknownAuthFailure(e.message));
@@ -75,8 +62,23 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Result<OperationStatus>> deleteUser() {
-    throw UnimplementedError();
+  Future<Result<OperationStatus>> deleteUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) {
+        return const Result.error(failure: UserSignedOutFailure());
+      }
+      await user.delete();
+      return const Result.success(OperationStatus.success);
+    } on FirebaseAuthException catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'deleteUser');
+      return Result.error(
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+      );
+    } catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'deleteUser');
+      return Result.error(failure: UnknownFailure(e, s));
+    }
   }
 
   @override

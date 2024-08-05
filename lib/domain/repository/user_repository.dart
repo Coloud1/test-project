@@ -4,7 +4,7 @@ import 'package:test_prj_ivan/domain/entity/user/user_changes.dart';
 import 'package:test_prj_ivan/domain/entity/user/user_entity.dart';
 
 abstract interface class UserRepository {
-  Stream<UserChanges> get listen;
+  Stream<UserChanges> get stream;
 
   Future<Result<UserEntity>> getUser();
 

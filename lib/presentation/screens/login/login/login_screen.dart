@@ -96,6 +96,10 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
             onPressed: () => _loginWithGithub(context),
             child: Text(context.tr.loginGithubButtonLabel),
           ),
+          ElevatedButton(
+            onPressed: () => _loginWithPhone(context),
+            child: Text('Phone'),
+          ),
         ],
       ),
     );
@@ -139,5 +143,9 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
     if (failure is FirebaseAuthFailure) {
       FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
     }
+  }
+
+  void _loginWithPhone(BuildContext context) {
+    context.pushNamed(AppRouter.loginPhoneRoute);
   }
 }
