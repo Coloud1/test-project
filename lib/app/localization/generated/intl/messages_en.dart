@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(minLength) =>
+      "This field should be at least ${minLength} characters long";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "apiFailureNoNetwork": MessageLookupByLibrary.simpleMessage(
@@ -36,11 +39,14 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Could not log in with provided credentials"),
         "generalErrorTitleOopsSomethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops! Something went wrong"),
-        "generalPhoneNumberOtpCodeLengthError":
+        "generalValidationFieldIsRequiredError":
+            MessageLookupByLibrary.simpleMessage("Field is required"),
+        "generalValidationLengthError": m0,
+        "generalValidationPhoneNumberIsNotValidError":
+            MessageLookupByLibrary.simpleMessage("Phone number is invalid"),
+        "generalValidationPhoneNumberOtpCodeLengthError":
             MessageLookupByLibrary.simpleMessage(
                 "OTP code length should be 6 digits"),
-        "generalValidationErrorFieldIsRequired":
-            MessageLookupByLibrary.simpleMessage("Field is required"),
         "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Home"),
         "homeLogOutButtonLabel":
             MessageLookupByLibrary.simpleMessage("Log out"),

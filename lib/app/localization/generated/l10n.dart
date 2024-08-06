@@ -311,22 +311,42 @@ class S {
   }
 
   /// `Field is required`
-  String get generalValidationErrorFieldIsRequired {
+  String get generalValidationFieldIsRequiredError {
     return Intl.message(
       'Field is required',
-      name: 'generalValidationErrorFieldIsRequired',
+      name: 'generalValidationFieldIsRequiredError',
       desc: '',
       args: [],
     );
   }
 
   /// `OTP code length should be 6 digits`
-  String get generalPhoneNumberOtpCodeLengthError {
+  String get generalValidationPhoneNumberOtpCodeLengthError {
     return Intl.message(
       'OTP code length should be 6 digits',
-      name: 'generalPhoneNumberOtpCodeLengthError',
+      name: 'generalValidationPhoneNumberOtpCodeLengthError',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Phone number is invalid`
+  String get generalValidationPhoneNumberIsNotValidError {
+    return Intl.message(
+      'Phone number is invalid',
+      name: 'generalValidationPhoneNumberIsNotValidError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should be at least {minLength} characters long`
+  String generalValidationLengthError(int minLength) {
+    return Intl.message(
+      'This field should be at least $minLength characters long',
+      name: 'generalValidationLengthError',
+      desc: '',
+      args: [minLength],
     );
   }
 }

@@ -26,6 +26,15 @@
   "homeLogOutButtonLabel": "Log out",
   "firebaseAuthInvalidCredentialsFailure": "Could not log in with provided credentials",
   "generalErrorTitleOopsSomethingWentWrong": "Oops! Something went wrong",
-  "generalValidationErrorFieldIsRequired": "Field is required",
-  "generalPhoneNumberOtpCodeLengthError": "OTP code length should be 6 digits"
+  "generalValidationFieldIsRequiredError": "Field is required",
+  "generalValidationPhoneNumberOtpCodeLengthError": "OTP code length should be 6 digits",
+  "generalValidationPhoneNumberIsNotValidError": "Phone number is invalid",
+  "generalValidationLengthError": "This field should be at least {minLength} characters long",
+  "@generalValidationLengthError": {
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  }
 }

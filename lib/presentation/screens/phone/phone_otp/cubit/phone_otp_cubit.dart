@@ -18,28 +18,27 @@ class PhoneOtpCubit
             phoneNumber: phoneNumber,
             verificationId: '',
           ),
-        ) {
-    _init();
-  }
-
-  void _init() {
-    _subscription = _phoneAuthService.stream.listen((event) {
-      switch (event) {
-        case PhoneAuthEventVerificationCompleted():
-          _onVerificationCompleted(event);
-        case PhoneAuthEventVerificationFailed():
-          _onVerificationFailed(event);
-        case PhoneAuthEventCodeSent():
-          _onCodeSent(event);
-        case PhoneAuthEventCodeTimeout():
-          _onCodeTimeout(event);
-      }
-    });
-  }
+        );
 
   Future<void> sendCode() async {
     final result = await _phoneAuthService.verifyPhoneNumber(state.phoneNumber);
-    result.whenOrNull(error: onFailure);
+
+    if (result.success) {
+      _subscription = result.data.listen((event) {
+        switch (event) {
+          case PhoneAuthEventVerificationCompleted():
+            _onVerificationCompleted(event);
+          case PhoneAuthEventVerificationFailed():
+            _onVerificationFailed(event);
+          case PhoneAuthEventCodeSent():
+            _onCodeSent(event);
+          case PhoneAuthEventCodeTimeout():
+            _onCodeTimeout(event);
+        }
+      });
+    } else {
+      onFailure(result.error.failure);
+    }
   }
 
   Future<void> confirmPhone(String code) async {

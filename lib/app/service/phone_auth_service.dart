@@ -23,9 +23,9 @@ class PhoneAuthService {
   })  : _auth = auth,
         _authService = authService;
 
-  Stream<PhoneAuthEvent> get stream => _streamController.stream;
-
-  Future<Result<OperationStatus>> verifyPhoneNumber(String phoneNumber) async {
+  Future<Result<Stream<PhoneAuthEvent>>> verifyPhoneNumber(
+    String phoneNumber,
+  ) async {
     try {
       await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -78,7 +78,7 @@ class PhoneAuthService {
           );
         },
       );
-      return const Result.success(OperationStatus.success);
+      return Result.success(_streamController.stream);
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'verifyPhoneNumber');
       return Result.error(
