@@ -5,7 +5,10 @@ abstract interface class LoginSource {
 
   Future<UserCredential> signInWithGoogle();
 
-  Future<UserCredential> signInWithPhone();
+  Future<UserCredential> signInWithPhone({
+    required String verificationId,
+    required String smsCode,
+  });
 
   Future<UserCredential> signInWithGithub();
 

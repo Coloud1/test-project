@@ -1,20 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pinput/pinput.dart';
+import 'package:test_prj_ivan/app/service/phone_auth_service.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
+import 'package:test_prj_ivan/app/util/field_focus_util.dart';
+import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
+import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/cubit/phone_otp_cubit_imports.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
+import 'package:test_prj_ivan/presentation/widgets/form_column.dart';
 import 'package:test_prj_ivan/presentation/widgets/scaffold_wrapper.dart';
 
 class PhoneOtpScreen extends StatefulWidget {
-  const PhoneOtpScreen({super.key});
+  final String phoneNumber;
+
+  const PhoneOtpScreen({
+    required this.phoneNumber,
+    super.key,
+  });
 
   @override
   State<PhoneOtpScreen> createState() => _PhoneOtpScreenState();
 }
 
-class _PhoneOtpScreenState extends State<PhoneOtpScreen> {
+class _PhoneOtpScreenState extends BaseCubitState<PhoneOtpCubitScreenState,
+    PhoneOtpCubit, PhoneOtpCubitSR, PhoneOtpScreen> {
   final TextEditingController _pinController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  PhoneOtpCubit createBloc() => PhoneOtpCubit(
+        GetIt.I.get<PhoneAuthService>(),
+        phoneNumber: widget.phoneNumber,
+      );
+
+  @override
+  void onBlocCreated(BuildContext context, PhoneOtpCubit bloc) {
+    super.onBlocCreated(context, bloc);
+    bloc.sendCode();
+  }
+
+  @override
+  Widget buildWidget(BuildContext context) {
     const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
     const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
@@ -29,21 +55,31 @@ class _PhoneOtpScreenState extends State<PhoneOtpScreen> {
     );
 
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Phone OTP'),
+      appBar: CustomAppBar(title: context.tr.loginPhoneNumberOtpTitle),
       extendBodyBehindAppBar: true,
-      body: Column(
+      body: FormColumn(
+        key: _formKey,
         children: [
           const Spacer(),
           Center(
             child: Pinput(
               controller: _pinController,
               validator: (value) {
-                return value == '2222' ? null : 'Pin is incorrect';
+                if (value == null || value.isEmpty) {
+                  return context.tr.generalValidationErrorFieldIsRequired;
+                }
+
+                if (value.length < 6) {
+                  return context.tr.generalPhoneNumberOtpCodeLengthError;
+                }
+
+                return null;
               },
               length: 6,
               hapticFeedbackType: HapticFeedbackType.lightImpact,
               onCompleted: (pin) {
                 debugPrint('onCompleted: $pin');
+                _checkAndSendCode(context);
               },
               onChanged: (value) {
                 debugPrint('onChanged: $value');
@@ -75,6 +111,7 @@ class _PhoneOtpScreenState extends State<PhoneOtpScreen> {
               errorPinTheme: defaultPinTheme.copyBorderWith(
                 border: Border.all(color: Colors.redAccent),
               ),
+              onTapOutside: FieldFocusUtil.unfocus,
             ),
           ),
           const Spacer(),
@@ -84,5 +121,11 @@ class _PhoneOtpScreenState extends State<PhoneOtpScreen> {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       maintainBottomViewPadding: true,
     );
+  }
+
+  void _checkAndSendCode(BuildContext context) {
+    if (_formKey.currentState?.validate() ?? false) {
+      blocOf(context).confirmPhone(_pinController.text);
+    }
   }
 }

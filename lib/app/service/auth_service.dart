@@ -21,6 +21,10 @@ class AuthService {
       LoginParamsAppleId() => _loginRepository.signInWithApple(),
       LoginParamsGoogle() => _loginRepository.signInWithGoogle(),
       LoginParamsGithub() => _loginRepository.signInWithGithub(),
+      LoginParamsPhone() => _loginRepository.signInWithPhone(
+          verificationId: params.verificationId,
+          smsCode: params.smsCode,
+        ),
     };
   }
 }

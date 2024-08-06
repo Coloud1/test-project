@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
-
 import 'package:test_prj_ivan/presentation/style/app_colors.dart';
+import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
 part 'theme_text_styles.tailor.dart';
 
@@ -12,12 +10,15 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles>
     with _$ThemeTextStylesTailorMixin {
   @override
   final TextStyle button;
+
   @override
   final TextStyle text;
-  ThemeTextStyles({
+
+  const ThemeTextStyles({
     required this.button,
     required this.text,
   });
+
   factory ThemeTextStyles.light() => ThemeTextStyles(
         button: TextStyle(
           fontSize: 18.0.sp,
@@ -30,6 +31,7 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles>
           color: AppColors.textLight,
         ),
       );
+
   factory ThemeTextStyles.dark() => ThemeTextStyles(
         button: TextStyle(
           fontSize: 18.0.sp,

@@ -1,8 +1,10 @@
 //@formatter:off
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:test_prj_ivan/app/service/app_service.dart';
 import 'package:test_prj_ivan/app/service/auth_service.dart';
+import 'package:test_prj_ivan/app/service/phone_auth_service.dart';
 import 'package:test_prj_ivan/app/service/session_service/session_service.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
 import 'package:test_prj_ivan/domain/repository/login_repository.dart';
@@ -21,10 +23,16 @@ void registerAppServices(GetIt getIt) {
         loginRepository: getIt.get<LoginRepository>(),
       ),
     )
-    ..registerSingleton(
+    ..registerSingleton<UserService>(
       UserService(
         userRepository: getIt.get<UserRepository>(),
         sessionService: getIt.get<SessionService>(),
+      ),
+    )
+    ..registerFactory<PhoneAuthService>(
+      () => PhoneAuthService(
+        auth: FirebaseAuth.instance,
+        authService: getIt.get<AuthService>(),
       ),
     );
 }

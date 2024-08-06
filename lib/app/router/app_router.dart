@@ -80,7 +80,9 @@ class AppRouter {
             GoRoute(
               path: _loginPhoneOtpPath,
               name: loginPhoneOtpRoute,
-              builder: (context, state) => const PhoneOtpScreen(),
+              builder: (context, state) => PhoneOtpScreen(
+                phoneNumber: state.extra as String? ?? '',
+              ),
             ),
           ],
         ),

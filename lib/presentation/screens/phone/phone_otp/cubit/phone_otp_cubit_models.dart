@@ -4,7 +4,10 @@ part 'phone_otp_cubit_models.freezed.dart';
 
 @freezed
 class PhoneOtpCubitScreenState with _$PhoneOtpCubitScreenState {
-  const factory PhoneOtpCubitScreenState() = _PhoneOtpCubitScreenState;
+  const factory PhoneOtpCubitScreenState({
+    required String phoneNumber,
+    required String verificationId,
+  }) = _PhoneOtpCubitScreenState;
 }
 
 @freezed

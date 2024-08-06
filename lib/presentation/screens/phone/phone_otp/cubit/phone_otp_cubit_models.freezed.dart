@@ -15,13 +15,22 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$PhoneOtpCubitScreenState {}
+mixin _$PhoneOtpCubitScreenState {
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get verificationId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PhoneOtpCubitScreenStateCopyWith<PhoneOtpCubitScreenState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $PhoneOtpCubitScreenStateCopyWith<$Res> {
   factory $PhoneOtpCubitScreenStateCopyWith(PhoneOtpCubitScreenState value,
           $Res Function(PhoneOtpCubitScreenState) then) =
       _$PhoneOtpCubitScreenStateCopyWithImpl<$Res, PhoneOtpCubitScreenState>;
+  @useResult
+  $Res call({String phoneNumber, String verificationId});
 }
 
 /// @nodoc
@@ -34,14 +43,36 @@ class _$PhoneOtpCubitScreenStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? phoneNumber = null,
+    Object? verificationId = null,
+  }) {
+    return _then(_value.copyWith(
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      verificationId: null == verificationId
+          ? _value.verificationId
+          : verificationId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$PhoneOtpCubitScreenStateImplCopyWith<$Res> {
+abstract class _$$PhoneOtpCubitScreenStateImplCopyWith<$Res>
+    implements $PhoneOtpCubitScreenStateCopyWith<$Res> {
   factory _$$PhoneOtpCubitScreenStateImplCopyWith(
           _$PhoneOtpCubitScreenStateImpl value,
           $Res Function(_$PhoneOtpCubitScreenStateImpl) then) =
       __$$PhoneOtpCubitScreenStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String phoneNumber, String verificationId});
 }
 
 /// @nodoc
@@ -53,31 +84,77 @@ class __$$PhoneOtpCubitScreenStateImplCopyWithImpl<$Res>
       _$PhoneOtpCubitScreenStateImpl _value,
       $Res Function(_$PhoneOtpCubitScreenStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? phoneNumber = null,
+    Object? verificationId = null,
+  }) {
+    return _then(_$PhoneOtpCubitScreenStateImpl(
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      verificationId: null == verificationId
+          ? _value.verificationId
+          : verificationId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$PhoneOtpCubitScreenStateImpl implements _PhoneOtpCubitScreenState {
-  const _$PhoneOtpCubitScreenStateImpl();
+  const _$PhoneOtpCubitScreenStateImpl(
+      {required this.phoneNumber, required this.verificationId});
+
+  @override
+  final String phoneNumber;
+  @override
+  final String verificationId;
 
   @override
   String toString() {
-    return 'PhoneOtpCubitScreenState()';
+    return 'PhoneOtpCubitScreenState(phoneNumber: $phoneNumber, verificationId: $verificationId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PhoneOtpCubitScreenStateImpl);
+            other is _$PhoneOtpCubitScreenStateImpl &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.verificationId, verificationId) ||
+                other.verificationId == verificationId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, phoneNumber, verificationId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PhoneOtpCubitScreenStateImplCopyWith<_$PhoneOtpCubitScreenStateImpl>
+      get copyWith => __$$PhoneOtpCubitScreenStateImplCopyWithImpl<
+          _$PhoneOtpCubitScreenStateImpl>(this, _$identity);
 }
 
 abstract class _PhoneOtpCubitScreenState implements PhoneOtpCubitScreenState {
-  const factory _PhoneOtpCubitScreenState() = _$PhoneOtpCubitScreenStateImpl;
+  const factory _PhoneOtpCubitScreenState(
+      {required final String phoneNumber,
+      required final String verificationId}) = _$PhoneOtpCubitScreenStateImpl;
+
+  @override
+  String get phoneNumber;
+  @override
+  String get verificationId;
+  @override
+  @JsonKey(ignore: true)
+  _$$PhoneOtpCubitScreenStateImplCopyWith<_$PhoneOtpCubitScreenStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

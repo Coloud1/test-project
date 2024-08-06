@@ -45,8 +45,14 @@ class LoginSourceImpl implements LoginSource {
   }
 
   @override
-  Future<UserCredential> signInWithPhone() {
-    // TODO: implement signInWithPhone
-    throw UnimplementedError();
+  Future<UserCredential> signInWithPhone({
+    required String verificationId,
+    required String smsCode,
+  }) {
+    final credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    );
+    return _auth.signInWithCredential(credential);
   }
 }

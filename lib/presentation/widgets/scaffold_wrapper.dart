@@ -46,8 +46,7 @@ class ScaffoldWrapper extends StatelessWidget {
       appBar: appBar,
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
+      extendBodyBehindAppBar: extendBodyBehindAppBar,
     );
   }
 }

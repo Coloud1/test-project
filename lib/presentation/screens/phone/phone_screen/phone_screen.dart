@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_prj_ivan/app/router/app_router.dart';
-import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
-import 'package:test_prj_ivan/presentation/screens/phone/phone_screen/cubit/phone_screen_imports.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
+import 'package:test_prj_ivan/app/util/validators/base_validator.dart';
+import 'package:test_prj_ivan/app/util/validators/phone_number_validator.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_textfield/custom_textfield.dart';
 import 'package:test_prj_ivan/presentation/widgets/form_column.dart';
@@ -15,24 +16,15 @@ class PhoneScreen extends StatefulWidget {
   State<PhoneScreen> createState() => _PhoneScreenState();
 }
 
-class _PhoneScreenState extends BaseCubitState<PhoneScreenCubitState,
-    PhoneScreenCubit, PhoneScreenCubitSR, PhoneScreen> {
+class _PhoneScreenState extends State<PhoneScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final BaseValidator _phoneValidator = PhoneNumberValidator();
 
   @override
-  PhoneScreenCubit createBloc() => PhoneScreenCubit();
-
-  @override
-  void onBlocCreated(BuildContext context, PhoneScreenCubit bloc) {
-    super.onBlocCreated(context, bloc);
-    bloc.singleResults.listen((sr) => _onSR(context, sr));
-  }
-
-  @override
-  Widget buildWidget(BuildContext context) {
+  Widget build(BuildContext context) {
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Phone'),
+      appBar: CustomAppBar(title: context.tr.loginPhoneAppBarTitle),
       maintainBottomViewPadding: true,
       margin: const EdgeInsets.symmetric(horizontal: 16),
       safeArea: (top: true, bottom: true),
@@ -42,24 +34,17 @@ class _PhoneScreenState extends BaseCubitState<PhoneScreenCubitState,
           const SizedBox(height: 40),
           CustomTextField(
             controller: _phoneController,
-            hintText: 'Phone Number',
+            hintText: context.tr.loginPhoneNumberField,
             keyboardType: TextInputType.phone,
-            validator: (phone) {
-              if (phone == null || phone.isEmpty) {
-                return 'Field is required';
-              }
-
-              if (!RegExp(r'^\+?\d*$').hasMatch(phone)) {
-                return 'Phone number is invalid';
-              }
-
-              return null;
-            },
+            validator: (phone) => _phoneValidator.validate(
+              context,
+              value: phone,
+            ),
           ),
           const Spacer(),
           ElevatedButton(
             onPressed: () => _sendSMS(context),
-            child: const Text('Send SMS'),
+            child: Text(context.tr.loginPhoneSendSMSButtonLabel),
           ),
           const SizedBox(height: 100),
         ],
@@ -75,14 +60,10 @@ class _PhoneScreenState extends BaseCubitState<PhoneScreenCubitState,
 
   void _sendSMS(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      blocOf(context).saveLastEnteredPhone(_phoneController.text);
+      context.pushNamed(
+        AppRouter.loginPhoneOtpRoute,
+        extra: _phoneController.text,
+      );
     }
-  }
-
-  void _onSR(BuildContext context, PhoneScreenCubitSR sr) {
-    sr.when(
-      navigateToOTP: (phone) =>
-          context.pushNamed(AppRouter.loginPhoneOtpRoute, extra: phone),
-    );
   }
 }

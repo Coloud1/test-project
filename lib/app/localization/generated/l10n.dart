@@ -190,6 +190,46 @@ class S {
     );
   }
 
+  /// `Phone`
+  String get loginPhoneAppBarTitle {
+    return Intl.message(
+      'Phone',
+      name: 'loginPhoneAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get loginPhoneNumberField {
+    return Intl.message(
+      'Phone number',
+      name: 'loginPhoneNumberField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send SMS`
+  String get loginPhoneSendSMSButtonLabel {
+    return Intl.message(
+      'Send SMS',
+      name: 'loginPhoneSendSMSButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code`
+  String get loginPhoneNumberOtpTitle {
+    return Intl.message(
+      'OTP code',
+      name: 'loginPhoneNumberOtpTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Registration`
   String get registrationAppBarTitle {
     return Intl.message(
@@ -265,6 +305,26 @@ class S {
     return Intl.message(
       'Oops! Something went wrong',
       name: 'generalErrorTitleOopsSomethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field is required`
+  String get generalValidationErrorFieldIsRequired {
+    return Intl.message(
+      'Field is required',
+      name: 'generalValidationErrorFieldIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code length should be 6 digits`
+  String get generalPhoneNumberOtpCodeLengthError {
+    return Intl.message(
+      'OTP code length should be 6 digits',
+      name: 'generalPhoneNumberOtpCodeLengthError',
       desc: '',
       args: [],
     );
