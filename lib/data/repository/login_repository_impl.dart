@@ -64,9 +64,24 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  Future<Result<OperationStatus>> signInWithPhone() {
-    // TODO: implement signInWithPhone
-    throw UnimplementedError();
+  Future<Result<OperationStatus>> signInWithPhone({
+    required String verificationId,
+    required String smsCode,
+  }) async {
+    try {
+      await _source.signInWithPhone(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+      return const Result.success(OperationStatus.success);
+    } on FirebaseAuthException catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'signInWithGithub');
+      return Result.error(
+        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+      );
+    } catch (e, s) {
+      return Result.error(failure: UnknownFailure(e, s));
+    }
   }
 
   @override

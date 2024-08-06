@@ -6,7 +6,10 @@ abstract interface class LoginRepository {
 
   Future<Result<OperationStatus>> signInWithGoogle();
 
-  Future<Result<OperationStatus>> signInWithPhone();
+  Future<Result<OperationStatus>> signInWithPhone({
+    required String verificationId,
+    required String smsCode,
+  });
 
   Future<Result<OperationStatus>> signInWithGithub();
 

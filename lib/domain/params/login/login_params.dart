@@ -23,3 +23,13 @@ class LoginParamsGoogle extends LoginParams {
 class LoginParamsGithub extends LoginParams {
   const LoginParamsGithub();
 }
+
+class LoginParamsPhone extends LoginParams {
+  final String verificationId;
+  final String smsCode;
+
+  const LoginParamsPhone({
+    required this.verificationId,
+    required this.smsCode,
+  });
+}

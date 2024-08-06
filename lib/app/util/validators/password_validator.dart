@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
 import 'package:test_prj_ivan/app/util/validators/base_validator.dart';
 
 class PasswordValidator implements BaseValidator {
@@ -9,11 +10,11 @@ class PasswordValidator implements BaseValidator {
   @override
   String? validate(BuildContext context, {required String? value}) {
     if (value == null || value.isEmpty) {
-      return 'Password is required';
+      return context.tr.generalValidationFieldIsRequiredError;
     }
 
     if (value.length < minLength) {
-      return 'This field should be at least $minLength characters long';
+      return context.tr.generalValidationLengthError(minLength);
     }
 
     return null;

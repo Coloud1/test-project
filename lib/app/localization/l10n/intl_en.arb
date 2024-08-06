@@ -1,31 +1,40 @@
 {
   "@@locale": "en",
-
   "appName": "Arch Sample",
   "title": "Arch Sample",
-
   "apiFailureNoNetwork": "Sorry, we're having trouble connecting. Please check your internet connection and try again.\n\nReach out to support if you continue to experience issues.",
   "apiFailureUnAuthorized": "The username or password you entered is incorrect.",
   "apiFailureTooManyRequests": "Uh oh! Looks like we ran into an issue while processing this request. Please try again.\n\nReach out to support if you continue to experience issues.",
   "apiFailureUndefined": "Uh oh! Looks like we ran into an issue while processing this request. Please try again.\n\nReach out to support if you continue to experience issues.",
-
-  "loginAppBarTitle" : "Login",
-  "loginEmailFieldLabel" : "Email",
-  "loginPasswordFieldLabel" : "Password",
-  "loginCredentialsButtonLabel" : "Login",
+  "loginAppBarTitle": "Login",
+  "loginEmailFieldLabel": "Email",
+  "loginPasswordFieldLabel": "Password",
+  "loginCredentialsButtonLabel": "Login",
   "loginCreateAccountButtonLabel": "Create account",
-  "loginAppleIdButtonLabel" : "Apple Id",
-  "loginGoogleButtonLabel" : "Google",
+  "loginAppleIdButtonLabel": "Apple Id",
+  "loginGoogleButtonLabel": "Google",
   "loginGithubButtonLabel": "Github",
-
-  "registrationAppBarTitle" : "Registration",
-  "registrationEmailFieldLabel" : "Email",
+  "loginPhoneAppBarTitle": "Phone",
+  "loginPhoneNumberField": "Phone number",
+  "loginPhoneSendSMSButtonLabel": "Send SMS",
+  "loginPhoneNumberOtpTitle": "OTP code",
+  "registrationAppBarTitle": "Registration",
+  "registrationEmailFieldLabel": "Email",
   "registrationPasswordFieldLabel": "Password",
   "registrationCreateAccountButtonLabel": "Create account",
-
   "homeAppBarTitle": "Home",
   "homeLogOutButtonLabel": "Log out",
-
-  "firebaseAuthInvalidCredentialsFailure" : "Could not log in with provided credentials",
-  "generalErrorTitleOopsSomethingWentWrong": "Oops! Something went wrong"
+  "firebaseAuthInvalidCredentialsFailure": "Could not log in with provided credentials",
+  "generalErrorTitleOopsSomethingWentWrong": "Oops! Something went wrong",
+  "generalValidationFieldIsRequiredError": "Field is required",
+  "generalValidationPhoneNumberOtpCodeLengthError": "OTP code length should be 6 digits",
+  "generalValidationPhoneNumberIsNotValidError": "Phone number is invalid",
+  "generalValidationLengthError": "This field should be at least {minLength} characters long",
+  "@generalValidationLengthError": {
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  }
 }

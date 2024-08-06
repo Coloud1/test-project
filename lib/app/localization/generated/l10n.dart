@@ -190,6 +190,46 @@ class S {
     );
   }
 
+  /// `Phone`
+  String get loginPhoneAppBarTitle {
+    return Intl.message(
+      'Phone',
+      name: 'loginPhoneAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get loginPhoneNumberField {
+    return Intl.message(
+      'Phone number',
+      name: 'loginPhoneNumberField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send SMS`
+  String get loginPhoneSendSMSButtonLabel {
+    return Intl.message(
+      'Send SMS',
+      name: 'loginPhoneSendSMSButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code`
+  String get loginPhoneNumberOtpTitle {
+    return Intl.message(
+      'OTP code',
+      name: 'loginPhoneNumberOtpTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Registration`
   String get registrationAppBarTitle {
     return Intl.message(
@@ -267,6 +307,46 @@ class S {
       name: 'generalErrorTitleOopsSomethingWentWrong',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Field is required`
+  String get generalValidationFieldIsRequiredError {
+    return Intl.message(
+      'Field is required',
+      name: 'generalValidationFieldIsRequiredError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code length should be 6 digits`
+  String get generalValidationPhoneNumberOtpCodeLengthError {
+    return Intl.message(
+      'OTP code length should be 6 digits',
+      name: 'generalValidationPhoneNumberOtpCodeLengthError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number is invalid`
+  String get generalValidationPhoneNumberIsNotValidError {
+    return Intl.message(
+      'Phone number is invalid',
+      name: 'generalValidationPhoneNumberIsNotValidError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should be at least {minLength} characters long`
+  String generalValidationLengthError(int minLength) {
+    return Intl.message(
+      'This field should be at least $minLength characters long',
+      name: 'generalValidationLengthError',
+      desc: '',
+      args: [minLength],
     );
   }
 }
