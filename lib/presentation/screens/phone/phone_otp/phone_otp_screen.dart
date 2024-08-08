@@ -27,15 +27,15 @@ class _PhoneOtpScreenState extends BaseCubitState<PhoneOtpCubitScreenState,
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
-  PhoneOtpCubit createBloc() => PhoneOtpCubit(
+  PhoneOtpCubit createCubit() => PhoneOtpCubit(
         GetIt.I.get<PhoneAuthService>(),
         phoneNumber: widget.phoneNumber,
       );
 
   @override
-  void onBlocCreated(BuildContext context, PhoneOtpCubit bloc) {
-    super.onBlocCreated(context, bloc);
-    bloc.sendCode();
+  void onCubitCreated(BuildContext context, PhoneOtpCubit cubit) {
+    super.onCubitCreated(context, cubit);
+    cubit.sendCode();
   }
 
   @override
@@ -64,7 +64,7 @@ class _PhoneOtpScreenState extends BaseCubitState<PhoneOtpCubitScreenState,
 
   void _checkAndSendCode(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      blocOf(context).confirmPhone(_pinController.text);
+      cubitOf(context).confirmPhone(_pinController.text);
     }
   }
 }

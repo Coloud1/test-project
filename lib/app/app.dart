@@ -8,7 +8,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:test_prj_ivan/app/bloc/app_bloc_imports.dart';
 import 'package:test_prj_ivan/app/localization/generated/l10n.dart';
 import 'package:test_prj_ivan/app/router/app_router.dart';
-import 'package:test_prj_ivan/core/arch/bloc/base_block_state.dart';
+import 'package:test_prj_ivan/core/arch/bloc/base_bloc_state.dart';
 import 'package:test_prj_ivan/core/arch/widget/common/flavor_banner.dart';
 import 'package:test_prj_ivan/presentation/style/theme/theme_imports.dart';
 

@@ -35,10 +35,4 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       return Result.error(failure: UnknownFailure(e, s));
     }
   }
-
-  @override
-  Future<Result<OperationStatus>> createAccountWithPhoneNumber() {
-    // TODO: implement createAccountWithPhoneNumber
-    throw UnimplementedError();
-  }
 }

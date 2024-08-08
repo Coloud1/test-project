@@ -1,10 +1,13 @@
 //@formatter:off
 
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_prj_ivan/app/service/session_service/session_status.dart';
+import 'package:test_prj_ivan/app/service/user_service.dart';
 import 'package:test_prj_ivan/core/di/services.dart';
 import 'package:test_prj_ivan/presentation/screens/home/home_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/login_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/onboarding/set_name/set_name_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/phone_otp_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_screen/phone_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/registration_screen.dart';
@@ -22,6 +25,9 @@ class AppRouter {
 
   static const String _registrationPath = 'registration';
   static const String registrationRoute = 'registrationRoute';
+
+  static const String _setNamePath = '/set-name';
+  static const String setNameRoute = 'setNameRoute';
 
   static const String _homePath = '/home';
   static const String homeRoute = 'home';
@@ -45,7 +51,8 @@ class AppRouter {
         final session = sessionService();
 
         if (session.sessionStatus == SessionStatus.open) {
-          if (state.matchedLocation.startsWith(_homePath)) {
+          if (state.matchedLocation.startsWith(_homePath) ||
+              state.matchedLocation.startsWith(_setNamePath)) {
             return null;
           } else {
             return _homePath;
@@ -87,9 +94,25 @@ class AppRouter {
           ],
         ),
         GoRoute(
+          path: _setNamePath,
+          name: setNameRoute,
+          builder: (context, state) => const SetNameScreen(),
+        ),
+        GoRoute(
           path: _homePath,
           name: homeRoute,
           builder: (context, state) => const HomeScreen(),
+          redirect: (context, state) {
+            final service = GetIt.I.get<UserService>();
+
+            if (service.user == null ||
+                (service.user?.displayName.isEmpty ?? true) ||
+                service.user?.email == null) {
+              return _setNamePath;
+            }
+
+            return _setNamePath;
+          },
         ),
         //{routes end}
       ],

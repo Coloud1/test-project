@@ -27,8 +27,7 @@ class UserRepositoryImpl implements UserRepository {
 
   void _initListener() {
     _innerStream = _auth.userChanges().map<UserChanges>((user) {
-      print(user?.providerData);
-      print(user?.metadata);
+      print(user);
       if (user == null) {
         return const AuthorizedUserSignedOut();
       } else {
@@ -57,8 +56,17 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Result<OperationStatus>> updateUser() async {
-    throw UnimplementedError();
+  Future<Result<OperationStatus>> updateUser({String? displayName}) async {
+    try {
+      await _auth.currentUser?.updateProfile(displayName: displayName);
+      return const Result.success(OperationStatus.success);
+    } on FirebaseAuthException catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'updateUser');
+      return Result.error(failure: UnknownFailure(e, s));
+    } catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'updateUser');
+      return Result.error(failure: UnknownFailure(e, s));
+    }
   }
 
   @override
