@@ -1,36 +1,29 @@
-//@formatter:off
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit.dart';
+import 'package:test_prj_ivan/core/arch/bloc/bloc_builders_mixin.dart';
+import 'package:test_prj_ivan/core/arch/bloc/bloc_typedefs.dart';
 import 'package:test_prj_ivan/core/arch/bloc/stream_listener.dart';
+import 'package:test_prj_ivan/core/arch/domain/entity/progress_state/progress_state.dart';
 
-typedef ListenDelegate<S> = void Function(BuildContext context, S state);
-typedef StateListener<S> = Widget Function(S state);
-typedef SingleResultListener<SR> = void Function(
-  BuildContext context,
-  SR singleResult,
-);
-
-abstract class BaseCubitState<S, B extends BaseCubit<S, SR>, SR,
-    W extends StatefulWidget> extends State<W> {
-  bool lazyBloc = false;
-  B? _bloc;
+abstract class BaseCubitState<S, C extends BaseCubit<S, SR>, SR,
+        W extends StatefulWidget> extends State<W>
+    with BlocBuildersMixin<C, S, SR> {
+  bool lazyCubit = false;
+  C? _cubit;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<B>(
+    return BlocProvider<C>(
       create: (context) {
-        final bloc = createBloc();
-        onBlocCreated(context, bloc);
-        _bloc = bloc;
-        return bloc;
+        final cubit = createCubit();
+        onCubitCreated(context, cubit);
+        _cubit = cubit;
+        return cubit;
       },
-      lazy: lazyBloc,
+      lazy: lazyCubit,
       child: Builder(
         builder: (context) {
           initParams(context);
@@ -42,18 +35,15 @@ abstract class BaseCubitState<S, B extends BaseCubit<S, SR>, SR,
 
   @override
   void dispose() {
-    if (context.mounted) {
-      context.loaderOverlay.hide();
-    }
-    if (_bloc != null) {
-      _bloc?.dispose();
+    if (_cubit != null) {
+      _cubit?.dispose();
     }
     super.dispose();
   }
 
-  B blocOf(BuildContext context) => context.read<B>();
+  C cubitOf(BuildContext context) => context.read<C>();
 
-  B createBloc() => GetIt.I.get<B>();
+  C createCubit() => GetIt.I.get<C>();
 
   Widget srObserver({
     required BuildContext context,
@@ -61,7 +51,7 @@ abstract class BaseCubitState<S, B extends BaseCubit<S, SR>, SR,
     required SingleResultListener<SR> onSR,
   }) {
     return StreamListener<SR>(
-      stream: (_bloc ?? blocOf(context)).singleResults,
+      stream: (_cubit ?? cubitOf(context)).singleResults,
       onData: (data) {
         onSR(context, data);
       },
@@ -69,33 +59,14 @@ abstract class BaseCubitState<S, B extends BaseCubit<S, SR>, SR,
     );
   }
 
-  Widget blocConsumer({
-    required StateListener<S> stateListener,
-    ListenDelegate<S>? listenDelegate,
-    BlocBuilderCondition<S>? buildWhen,
-    BlocListenerCondition<S>? listenWhen,
-  }) {
-    return BlocConsumer<B, S>(
-      builder: (_, state) => stateListener(state),
-      listener: listenDelegate ?? _defaultListenDelegate,
-      buildWhen: buildWhen,
-      listenWhen: listenWhen,
-    );
-  }
-
-  Widget blocBuilder({
-    required BlocWidgetBuilder<S> builder,
-    BlocBuilderCondition<S>? buildWhen,
-  }) {
-    return BlocBuilder<B, S>(builder: builder, buildWhen: buildWhen);
-  }
-
-  void onBlocCreated(BuildContext context, B bloc) {
-    bloc.progressStream.listen((event) async {
-      if (event) {
-        context.loaderOverlay.show();
-      } else {
-        context.loaderOverlay.hide();
+  void onCubitCreated(BuildContext context, C cubit) {
+    cubit.progressStream.listen((event) async {
+      if (event is DefaultProgressState) {
+        if (event.showProgress) {
+          context.loaderOverlay.show();
+        } else {
+          context.loaderOverlay.hide();
+        }
       }
     });
   }
@@ -104,7 +75,4 @@ abstract class BaseCubitState<S, B extends BaseCubit<S, SR>, SR,
   void initParams(BuildContext context) {}
 
   Widget buildWidget(BuildContext context);
-
-  // ignore: no-empty-block
-  void _defaultListenDelegate(BuildContext context, S state) {}
 }

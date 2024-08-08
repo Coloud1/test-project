@@ -8,7 +8,7 @@ abstract interface class UserRepository {
 
   Future<Result<UserEntity>> getUser();
 
-  Future<Result<OperationStatus>> updateUser();
+  Future<Result<OperationStatus>> updateUser({String? displayName});
 
   Future<Result<OperationStatus>> deleteUser();
 

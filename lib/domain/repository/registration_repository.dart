@@ -6,6 +6,4 @@ abstract interface class RegistrationRepository {
     required String email,
     required String password,
   });
-
-  Future<Result<OperationStatus>> createAccountWithPhoneNumber();
 }

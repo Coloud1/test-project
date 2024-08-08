@@ -13,6 +13,9 @@ class UserService {
 
   StreamSubscription<UserChanges>? _userSubscription;
   late StreamController<UserEntity> _streamController;
+  UserEntity? _storedUser;
+
+  UserEntity? get user => _storedUser;
 
   UserService({
     required UserRepository userRepository,
@@ -37,8 +40,10 @@ class UserService {
         if (state is AuthorizedUserChanged) {
           _streamController.add(state.user);
           _sessionService.openSession();
+          _storedUser = state.user;
         } else {
           _sessionService.closeSession();
+          _storedUser = null;
         }
       },
     );
@@ -46,8 +51,17 @@ class UserService {
 
   Stream<UserEntity> getStream() => _streamController.stream;
 
-  Future<Result<UserEntity>> getUser() {
+  Future<Result<UserEntity>> getUser() async {
+    final result = await _userRepository.getUser();
+    if (result.success) {
+      _storedUser = result.data;
+    }
+
     return _userRepository.getUser();
+  }
+
+  Future<Result<OperationStatus>> updateUser({String? displayName}) {
+    return _userRepository.updateUser(displayName: displayName);
   }
 
   Future<Result<OperationStatus>> logOut() async {
