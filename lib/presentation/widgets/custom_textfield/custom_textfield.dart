@@ -15,6 +15,9 @@ class CustomTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool useObscure;
   final FormFieldValidator<String>? validator;
+  final bool enableSuggestions;
+  final bool autocorrect;
+  final TextCapitalization textCapitalization;
 
   const CustomTextField({
     this.controller,
@@ -27,6 +30,9 @@ class CustomTextField extends StatefulWidget {
     this.inputFormatters,
     this.useObscure = false,
     this.validator,
+    this.enableSuggestions = true,
+    this.autocorrect = true,
+    this.textCapitalization = TextCapitalization.none,
     super.key,
   });
 
@@ -116,6 +122,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           //     .copyWith(color: context.appColors.whiteColor),
           inputFormatters: widget.inputFormatters,
           validator: widget.validator,
+          textCapitalization: widget.textCapitalization,
+          enableSuggestions: widget.enableSuggestions,
+          autocorrect: widget.autocorrect,
         ),
       ],
     );
