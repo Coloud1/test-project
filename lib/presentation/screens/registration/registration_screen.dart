@@ -54,6 +54,8 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
         children: [
           const SizedBox(height: 40),
           CustomTextField(
+            autocorrect: false,
+            enableSuggestions: false,
             controller: _emailController,
             hintText: context.tr.registrationEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,

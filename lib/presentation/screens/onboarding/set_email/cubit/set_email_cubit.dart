@@ -9,6 +9,8 @@ class SetEmailCubit
   SetEmailCubit(this._firebaseLogoutUseCase)
       : super(const SetEmailCubitScreenState());
 
+  Future<void> checkEmail() async {}
+
   Future<void> logout() async {
     await _firebaseLogoutUseCase();
   }

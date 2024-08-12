@@ -55,6 +55,8 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
         children: [
           const SizedBox(height: 40),
           CustomTextField(
+            enableSuggestions: false,
+            autocorrect: false,
             controller: _emailController,
             hintText: context.tr.loginEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,

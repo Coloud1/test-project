@@ -12,6 +12,7 @@ class UserProviderData with _$UserProviderData {
 
 enum UserProviderDataId {
   password,
+  phone,
   unknown;
 
   static UserProviderDataId fromRawString(String rawValue) {

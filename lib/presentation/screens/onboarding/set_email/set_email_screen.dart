@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test_prj_ivan/app/util/validators/email_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_email/cubit/set_email_cubit_imports.dart';
@@ -17,11 +19,18 @@ class SetEmailScreen extends StatefulWidget {
 class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
     SetEmailCubit, SetEmailCubitSR, SetEmailScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final EmailValidator _emailValidator = const EmailValidator();
 
   @override
   SetEmailCubit createCubit() => SetEmailCubit(
         GetIt.I.get<FirebaseLogoutUseCase>(),
       );
+
+  @override
+  void onCubitCreated(BuildContext context, SetEmailCubit cubit) {
+    super.onCubitCreated(context, cubit);
+    // TODO(Ivan Modlo): Add Loader error here
+  }
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -47,6 +56,9 @@ class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.emailAddress,
+            validator: (email) =>
+                _emailValidator.validate(context, value: email),
+            inputFormatters: [FilteringTextInputFormatter.deny(' ')],
           ),
           const Spacer(),
           ElevatedButton(
@@ -67,5 +79,6 @@ class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
 
   void _makeLogOut(BuildContext context) => cubitOf(context).logout();
 
-  Future<void> _verifyEmailAddress(BuildContext context) async {}
+  void _verifyEmailAddress(BuildContext context) =>
+      cubitOf(context).checkEmail();
 }
