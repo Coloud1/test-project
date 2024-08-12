@@ -110,7 +110,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
 
   void _onFailure(BuildContext context, Failure failure) {
     if (failure is FirebaseAuthFailure) {
-      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
+      FirebaseAuthDialogUtil.showFirebaseAuthFailure(context, failure: failure);
     }
   }
 }

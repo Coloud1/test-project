@@ -143,7 +143,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
 
   void _onFailure(BuildContext context, Failure failure) {
     if (failure is FirebaseAuthFailure) {
-      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
+      FirebaseAuthDialogUtil.showFirebaseAuthFailure(context, failure: failure);
     }
   }
 
