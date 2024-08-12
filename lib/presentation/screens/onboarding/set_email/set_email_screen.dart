@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
+import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_email/cubit/set_email_cubit_imports.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_textfield/custom_textfield.dart';
@@ -18,7 +19,9 @@ class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
   final TextEditingController _emailController = TextEditingController();
 
   @override
-  SetEmailCubit createCubit() => SetEmailCubit();
+  SetEmailCubit createCubit() => SetEmailCubit(
+        GetIt.I.get<FirebaseLogoutUseCase>(),
+      );
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -47,7 +50,7 @@ class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
           ),
           const Spacer(),
           ElevatedButton(
-            onPressed: () => _onVerify(context),
+            onPressed: () => _verifyEmailAddress(context),
             child: const Text('Verify email'),
           ),
           const SizedBox(height: 100),
@@ -62,9 +65,7 @@ class _SetEmailScreenState extends BaseCubitState<SetEmailCubitScreenState,
     super.dispose();
   }
 
-  void _makeLogOut(BuildContext context) {
-    FirebaseAuth.instance.signOut();
-  }
+  void _makeLogOut(BuildContext context) => cubitOf(context).logout();
 
-  void _onVerify(BuildContext context) {}
+  Future<void> _verifyEmailAddress(BuildContext context) async {}
 }

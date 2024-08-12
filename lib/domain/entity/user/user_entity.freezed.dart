@@ -16,11 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserEntity {
-  String get providerId => throw _privateConstructorUsedError;
+  List<UserProviderData> get providerData => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get photoURL => throw _privateConstructorUsedError;
+  UserMetadataEntity get userMetadata => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserEntityCopyWith<UserEntity> get copyWith =>
@@ -34,11 +35,14 @@ abstract class $UserEntityCopyWith<$Res> {
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
   $Res call(
-      {String providerId,
+      {List<UserProviderData> providerData,
       String uid,
       String displayName,
       String email,
-      String photoURL});
+      String photoURL,
+      UserMetadataEntity userMetadata});
+
+  $UserMetadataEntityCopyWith<$Res> get userMetadata;
 }
 
 /// @nodoc
@@ -54,17 +58,18 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? providerId = null,
+    Object? providerData = null,
     Object? uid = null,
     Object? displayName = null,
     Object? email = null,
     Object? photoURL = null,
+    Object? userMetadata = null,
   }) {
     return _then(_value.copyWith(
-      providerId: null == providerId
-          ? _value.providerId
-          : providerId // ignore: cast_nullable_to_non_nullable
-              as String,
+      providerData: null == providerData
+          ? _value.providerData
+          : providerData // ignore: cast_nullable_to_non_nullable
+              as List<UserProviderData>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -81,7 +86,19 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.photoURL
           : photoURL // ignore: cast_nullable_to_non_nullable
               as String,
+      userMetadata: null == userMetadata
+          ? _value.userMetadata
+          : userMetadata // ignore: cast_nullable_to_non_nullable
+              as UserMetadataEntity,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserMetadataEntityCopyWith<$Res> get userMetadata {
+    return $UserMetadataEntityCopyWith<$Res>(_value.userMetadata, (value) {
+      return _then(_value.copyWith(userMetadata: value) as $Val);
+    });
   }
 }
 
@@ -94,11 +111,15 @@ abstract class _$$UserEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String providerId,
+      {List<UserProviderData> providerData,
       String uid,
       String displayName,
       String email,
-      String photoURL});
+      String photoURL,
+      UserMetadataEntity userMetadata});
+
+  @override
+  $UserMetadataEntityCopyWith<$Res> get userMetadata;
 }
 
 /// @nodoc
@@ -112,17 +133,18 @@ class __$$UserEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? providerId = null,
+    Object? providerData = null,
     Object? uid = null,
     Object? displayName = null,
     Object? email = null,
     Object? photoURL = null,
+    Object? userMetadata = null,
   }) {
     return _then(_$UserEntityImpl(
-      providerId: null == providerId
-          ? _value.providerId
-          : providerId // ignore: cast_nullable_to_non_nullable
-              as String,
+      providerData: null == providerData
+          ? _value._providerData
+          : providerData // ignore: cast_nullable_to_non_nullable
+              as List<UserProviderData>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -139,6 +161,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.photoURL
           : photoURL // ignore: cast_nullable_to_non_nullable
               as String,
+      userMetadata: null == userMetadata
+          ? _value.userMetadata
+          : userMetadata // ignore: cast_nullable_to_non_nullable
+              as UserMetadataEntity,
     ));
   }
 }
@@ -147,14 +173,22 @@ class __$$UserEntityImplCopyWithImpl<$Res>
 
 class _$UserEntityImpl implements _UserEntity {
   const _$UserEntityImpl(
-      {required this.providerId,
+      {required final List<UserProviderData> providerData,
       required this.uid,
       required this.displayName,
       required this.email,
-      required this.photoURL});
+      required this.photoURL,
+      required this.userMetadata})
+      : _providerData = providerData;
 
+  final List<UserProviderData> _providerData;
   @override
-  final String providerId;
+  List<UserProviderData> get providerData {
+    if (_providerData is EqualUnmodifiableListView) return _providerData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_providerData);
+  }
+
   @override
   final String uid;
   @override
@@ -163,10 +197,12 @@ class _$UserEntityImpl implements _UserEntity {
   final String email;
   @override
   final String photoURL;
+  @override
+  final UserMetadataEntity userMetadata;
 
   @override
   String toString() {
-    return 'UserEntity(providerId: $providerId, uid: $uid, displayName: $displayName, email: $email, photoURL: $photoURL)';
+    return 'UserEntity(providerData: $providerData, uid: $uid, displayName: $displayName, email: $email, photoURL: $photoURL, userMetadata: $userMetadata)';
   }
 
   @override
@@ -174,19 +210,27 @@ class _$UserEntityImpl implements _UserEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserEntityImpl &&
-            (identical(other.providerId, providerId) ||
-                other.providerId == providerId) &&
+            const DeepCollectionEquality()
+                .equals(other._providerData, _providerData) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoURL, photoURL) ||
-                other.photoURL == photoURL));
+                other.photoURL == photoURL) &&
+            (identical(other.userMetadata, userMetadata) ||
+                other.userMetadata == userMetadata));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, providerId, uid, displayName, email, photoURL);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_providerData),
+      uid,
+      displayName,
+      email,
+      photoURL,
+      userMetadata);
 
   @JsonKey(ignore: true)
   @override
@@ -197,14 +241,15 @@ class _$UserEntityImpl implements _UserEntity {
 
 abstract class _UserEntity implements UserEntity {
   const factory _UserEntity(
-      {required final String providerId,
+      {required final List<UserProviderData> providerData,
       required final String uid,
       required final String displayName,
       required final String email,
-      required final String photoURL}) = _$UserEntityImpl;
+      required final String photoURL,
+      required final UserMetadataEntity userMetadata}) = _$UserEntityImpl;
 
   @override
-  String get providerId;
+  List<UserProviderData> get providerData;
   @override
   String get uid;
   @override
@@ -213,6 +258,8 @@ abstract class _UserEntity implements UserEntity {
   String get email;
   @override
   String get photoURL;
+  @override
+  UserMetadataEntity get userMetadata;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>

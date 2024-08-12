@@ -27,6 +27,9 @@ class UserRepositoryImpl implements UserRepository {
 
   void _initListener() {
     _innerStream = _auth.userChanges().map<UserChanges>((user) {
+      print(user?.providerData);
+      print(user?.metadata);
+
       if (user == null) {
         return const AuthorizedUserSignedOut();
       } else {
