@@ -6,6 +6,7 @@ import 'package:test_prj_ivan/app/service/user_service.dart';
 import 'package:test_prj_ivan/domain/repository/registration_repository.dart';
 import 'package:test_prj_ivan/domain/usecase/create_account_with_credentials_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/make_login_with_use_case.dart';
+import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/user/update_display_name_use_case.dart';
 
 void registerUseCases(GetIt getIt) {
@@ -22,6 +23,11 @@ void registerUseCases(GetIt getIt) {
     )
     ..registerLazySingleton<UpdateDisplayNameUseCase>(
       () => UpdateDisplayNameUseCase(
+        userService: getIt.get<UserService>(),
+      ),
+    )
+    ..registerLazySingleton<FirebaseLogoutUseCase>(
+      () => FirebaseLogoutUseCase(
         userService: getIt.get<UserService>(),
       ),
     );

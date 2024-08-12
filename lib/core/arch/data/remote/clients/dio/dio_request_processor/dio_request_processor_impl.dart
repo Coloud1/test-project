@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:retry/retry.dart';
-
 import 'package:test_prj_ivan/core/arch/data/remote/base/http_status.dart';
 import 'package:test_prj_ivan/core/arch/data/remote/clients/dio/dio_request_processor/dio_request_processor.dart';
 import 'package:test_prj_ivan/core/arch/data/remote/error/dio_error_processor.dart';

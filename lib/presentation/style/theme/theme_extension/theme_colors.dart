@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
-
 import 'package:test_prj_ivan/presentation/style/app_colors.dart';
+import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
 part 'theme_colors.tailor.dart';
 

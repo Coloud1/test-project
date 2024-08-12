@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
+import 'package:test_prj_ivan/app/util/validators/display_name_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
+import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/user/update_display_name_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_name/cubit/set_name_cubit_imports.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';
@@ -19,24 +23,33 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
     SetNameCubit, SetNameCubitSR, SetNameScreen> {
   final TextEditingController _displayNameController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final DisplayNameValidator _displayNameValidator =
+      const DisplayNameValidator();
 
   @override
   SetNameCubit createCubit() => SetNameCubit(
         GetIt.I.get<UpdateDisplayNameUseCase>(),
+        GetIt.I.get<FirebaseLogoutUseCase>(),
       );
 
   @override
   void onCubitCreated(BuildContext context, SetNameCubit cubit) {
     super.onCubitCreated(context, cubit);
-    cubit.failureStream.listen((failure) {
-      print(failure);
-    });
+    cubit.singleResults.listen((sr) => _onSR(context, sr));
   }
 
   @override
   Widget buildWidget(BuildContext context) {
     return ScaffoldWrapper(
-      appBar: const CustomAppBar(title: 'Set your Name'),
+      appBar: CustomAppBar(
+        title: 'Set your Name',
+        actions: [
+          IconButton(
+            onPressed: () => _makeLogOut(context),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
       margin: const EdgeInsets.symmetric(horizontal: 16),
       safeArea: (top: true, bottom: true),
       body: FormColumn(
@@ -45,19 +58,13 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
           const SizedBox(height: 40),
           CustomTextField(
             controller: _displayNameController,
-            keyboardType: TextInputType.name,
             hintText: 'Display name',
-            validator: (name) {
-              if (name == null || name.isEmpty) {
-                return 'Field is required';
-              }
-
-              if (name.trim().isEmpty) {
-                return 'Field is required';
-              }
-
-              return null;
-            },
+            validator: (name) => _displayNameValidator.validate(
+              context,
+              value: name,
+            ),
+            autocorrect: false,
+            textCapitalization: TextCapitalization.words,
           ),
           const Spacer(),
           ElevatedButton(
@@ -80,5 +87,13 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
     if (_formKey.currentState?.validate() ?? false) {
       cubitOf(context).updateDisplayName(_displayNameController.text);
     }
+  }
+
+  void _makeLogOut(BuildContext context) {
+    cubitOf(context).logOut();
+  }
+
+  void _onSR(BuildContext context, SetNameCubitSR sr) {
+    sr.when(navigateNext: () => context.goNamed(AppRoute.home.name));
   }
 }

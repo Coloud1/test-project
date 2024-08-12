@@ -1,12 +1,13 @@
 //@formatter:off
 
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_prj_ivan/app/service/session_service/session_status.dart';
-import 'package:test_prj_ivan/app/service/user_service.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
+import 'package:test_prj_ivan/app/router/go_router_wrapper.dart';
+import 'package:test_prj_ivan/app/router/guards/base_guard.dart';
 import 'package:test_prj_ivan/core/di/services.dart';
 import 'package:test_prj_ivan/presentation/screens/home/home_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/login_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/onboarding/set_email/set_email_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_name/set_name_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/phone_otp_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_screen/phone_screen.dart';
@@ -15,104 +16,79 @@ import 'package:test_prj_ivan/presentation/screens/registration/registration_scr
 //{imports end}
 
 class AppRouter {
-  static const _initialLocation = _loginPath;
-  static const String _loginPath = '/login';
-  static const String loginRoute = 'loginRoute';
-  static const String _loginPhonePath = 'phone';
-  static const String loginPhoneRoute = 'phoneRoute';
-  static const String _loginPhoneOtpPath = 'phone-otp';
-  static const String loginPhoneOtpRoute = 'phoneOtpRoute';
-
-  static const String _registrationPath = 'registration';
-  static const String registrationRoute = 'registrationRoute';
-
-  static const String _setNamePath = '/set-name';
-  static const String setNameRoute = 'setNameRoute';
-
-  static const String _homePath = '/home';
-  static const String homeRoute = 'home';
-
+  static final _initialLocation = AppRoute.login.routePath;
   static final AppRouter _instance = AppRouter._privateConstructor();
   static late GoRouter router;
+  static final Map<AppRoute, BaseGuard> _guards = {};
+  static late BaseGuard _globalGuard;
 
   AppRouter._privateConstructor() {
-    _initialize();
+    _initialize(guards: _guards);
   }
 
-  factory AppRouter.init() {
+  factory AppRouter.init({
+    Map<AppRoute, BaseGuard> guards = const {},
+    BaseGuard? globalGuard,
+  }) {
+    _guards
+      ..clear()
+      ..addAll(guards);
+
+    if (globalGuard != null) {
+      _globalGuard = globalGuard;
+    }
+
     return _instance;
   }
 
-  void _initialize({String initialLocation = _initialLocation}) {
+  void _initialize({
+    Map<AppRoute, BaseGuard> guards = const {},
+    String? initialLocation,
+  }) {
     router = GoRouter(
-      initialLocation: initialLocation,
+      initialLocation: initialLocation ?? _initialLocation,
       refreshListenable: sessionService(),
-      redirect: (context, state) {
-        final session = sessionService();
-
-        if (session.sessionStatus == SessionStatus.open) {
-          if (state.matchedLocation.startsWith(_homePath) ||
-              state.matchedLocation.startsWith(_setNamePath)) {
-            return null;
-          } else {
-            return _homePath;
-          }
-        } else {
-          if (state.matchedLocation.startsWith(_loginPath) ||
-              state.matchedLocation.startsWith(_registrationPath) ||
-              state.matchedLocation.startsWith(_loginPhonePath) ||
-              state.matchedLocation.startsWith(_loginPhoneOtpPath)) {
-            return null;
-          } else {
-            return _loginPath;
-          }
-        }
-      },
+      redirect: _globalGuard.makeRedirect,
       routes: <GoRoute>[
-        GoRoute(
-          path: _loginPath,
-          name: loginRoute,
+        GoRouterWrapper(
+          path: AppRoute.login.routePath,
+          name: AppRoute.login.name,
           builder: (context, state) => const LoginScreen(),
           routes: [
-            GoRoute(
-              path: _registrationPath,
-              name: registrationRoute,
+            GoRouterWrapper(
+              path: AppRoute.registration.routePath,
+              name: AppRoute.registration.name,
               builder: (context, state) => const RegistrationScreen(),
             ),
-            GoRoute(
-              path: _loginPhonePath,
-              name: loginPhoneRoute,
+            GoRouterWrapper(
+              path: AppRoute.loginPhone.routePath,
+              name: AppRoute.loginPhone.name,
               builder: (context, state) => const PhoneScreen(),
             ),
-            GoRoute(
-              path: _loginPhoneOtpPath,
-              name: loginPhoneOtpRoute,
+            GoRouterWrapper(
+              path: AppRoute.loginPhoneOtp.routePath,
+              name: AppRoute.loginPhoneOtp.name,
               builder: (context, state) => PhoneOtpScreen(
                 phoneNumber: state.extra as String? ?? '',
               ),
             ),
           ],
         ),
-        GoRoute(
-          path: _setNamePath,
-          name: setNameRoute,
+        GoRouterWrapper(
+          path: AppRoute.homeSetName.routePath,
+          name: AppRoute.homeSetName.name,
           builder: (context, state) => const SetNameScreen(),
         ),
-        GoRoute(
-          path: _homePath,
-          name: homeRoute,
+        GoRouterWrapper(
+          path: AppRoute.homeSetEmail.routePath,
+          name: AppRoute.homeSetEmail.name,
+          builder: (context, state) => const SetEmailScreen(),
+        ),
+        GoRouterWrapper(
+          path: AppRoute.home.routePath,
+          name: AppRoute.home.name,
           builder: (context, state) => const HomeScreen(),
-          redirect: (context, state) {
-            final service = GetIt.I.get<UserService>();
-
-            if (service.user == null ||
-                (service.user?.displayName.isEmpty ?? true) ||
-                service.user?.email == null) {
-              return _setNamePath;
-            }
-
-            return _setNamePath;
-          },
+          baseGuard: _guards[AppRoute.home],
         ),
         //{routes end}
       ],

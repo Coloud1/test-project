@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_prj_ivan/app/router/app_router.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
 import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
 import 'package:test_prj_ivan/app/util/validators/base_validator.dart';
 import 'package:test_prj_ivan/app/util/validators/phone_number_validator.dart';
@@ -61,7 +61,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   void _sendSMS(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
       context.pushNamed(
-        AppRouter.loginPhoneOtpRoute,
+        AppRoute.loginPhoneOtp.name,
         extra: _phoneController.text,
       );
     }

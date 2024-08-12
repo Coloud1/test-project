@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_prj_ivan/app/router/app_router.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
 import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
 import 'package:test_prj_ivan/app/util/firebase_auth_dialog_util.dart';
 import 'package:test_prj_ivan/app/util/validators/email_validator.dart';
@@ -124,7 +124,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
   }
 
   void _onRegistration(BuildContext context) {
-    context.pushNamed(AppRouter.registrationRoute);
+    context.pushNamed(AppRoute.registration.name);
   }
 
   void _loginWithAppleId(BuildContext context) {
@@ -146,6 +146,6 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
   }
 
   void _loginWithPhone(BuildContext context) {
-    context.pushNamed(AppRouter.loginPhoneRoute);
+    context.pushNamed(AppRoute.loginPhone.name);
   }
 }
