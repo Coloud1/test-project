@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_prj_ivan/app/router/app_router.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
 import 'package:test_prj_ivan/app/util/validators/display_name_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
@@ -94,6 +94,6 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
   }
 
   void _onSR(BuildContext context, SetNameCubitSR sr) {
-    sr.when(navigateNext: () => context.goNamed(AppRouter.setNameRoute));
+    sr.when(navigateNext: () => context.goNamed(AppRoute.home.name));
   }
 }

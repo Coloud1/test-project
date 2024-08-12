@@ -38,12 +38,12 @@ class UserService {
     _userSubscription = _userRepository.stream.listen(
       (state) {
         if (state is AuthorizedUserChanged) {
+          _storedUser = state.user;
           _streamController.add(state.user);
           _sessionService.openSession();
-          _storedUser = state.user;
         } else {
-          _sessionService.closeSession();
           _storedUser = null;
+          _sessionService.closeSession();
         }
       },
     );

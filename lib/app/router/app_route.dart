@@ -1,7 +1,15 @@
+import 'package:collection/collection.dart';
 import 'package:test_prj_ivan/app/router/app_route_location.dart';
 
 enum AppRoute {
-  root('/');
+  root('/'),
+  login('/login', location: AppRouteLocation.auth),
+  registration('registration', location: AppRouteLocation.auth),
+  loginPhone('phone', location: AppRouteLocation.auth),
+  loginPhoneOtp('phone-otp', location: AppRouteLocation.auth),
+  homeSetName('/set-name'),
+  homeSetEmail('/set-email'),
+  home('/home');
 //{routes declaration end}
 
   final String routePath;
@@ -23,6 +31,8 @@ enum AppRoute {
     if (value == null || value.isEmpty) {
       return null;
     }
-    return AppRoute.values.firstWhere((e) => e.routePath == value);
+    return AppRoute.values.firstWhereOrNull(
+      (e) => e.routePath == value,
+    );
   }
 }
