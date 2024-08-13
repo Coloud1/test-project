@@ -106,4 +106,31 @@ class UserRepositoryImpl implements UserRepository {
       return Result.error(failure: UnknownFailure(e, s));
     }
   }
+
+  @override
+  Future<Result<OperationStatus>> linkWithAccountCredential(
+    AuthCredential credential,
+  ) async {
+    try {
+      if (_auth.currentUser == null) {
+        return const Result.error(failure: UserSignedOutFailure());
+      }
+
+      await _auth.currentUser?.linkWithCredential(credential);
+      await _auth.currentUser?.reload();
+      return const Result.success(OperationStatus.success);
+    } on FirebaseException catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'linkWithProvider');
+      return Result.error(failure: UnknownAuthFailure(e.message));
+    } catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'linkWithProvider');
+      return Result.error(failure: UnknownFailure(e, s));
+    }
+  }
+
+  @override
+  Future<Result<OperationStatus>> unlinkProvider(String providerId) {
+    // TODO: implement unlinkProvider
+    throw UnimplementedError();
+  }
 }

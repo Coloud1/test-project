@@ -1,4 +1,4 @@
-class FirebaseConsts {
+final class FirebaseConsts {
   static const String emailAlreadyInUse = 'email-already-in-use';
   static const String invalidEmail = 'invalid-email';
   static const String operationNotAllowed = 'operation-not-allowed';

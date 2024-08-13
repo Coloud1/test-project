@@ -18,33 +18,33 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SetEmailCubitSR {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onSR,
+    required TResult Function() navigateNext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onSR,
+    TResult? Function()? navigateNext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onSR,
+    TResult Function()? navigateNext,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SetEmailCubitSROnSR value) onSR,
+    required TResult Function(_SetEmailCubitSRNavigateNext value) navigateNext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SetEmailCubitSROnSR value)? onSR,
+    TResult? Function(_SetEmailCubitSRNavigateNext value)? navigateNext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SetEmailCubitSROnSR value)? onSR,
+    TResult Function(_SetEmailCubitSRNavigateNext value)? navigateNext,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,36 +69,40 @@ class _$SetEmailCubitSRCopyWithImpl<$Res, $Val extends SetEmailCubitSR>
 }
 
 /// @nodoc
-abstract class _$$SetEmailCubitSROnSRImplCopyWith<$Res> {
-  factory _$$SetEmailCubitSROnSRImplCopyWith(_$SetEmailCubitSROnSRImpl value,
-          $Res Function(_$SetEmailCubitSROnSRImpl) then) =
-      __$$SetEmailCubitSROnSRImplCopyWithImpl<$Res>;
+abstract class _$$SetEmailCubitSRNavigateNextImplCopyWith<$Res> {
+  factory _$$SetEmailCubitSRNavigateNextImplCopyWith(
+          _$SetEmailCubitSRNavigateNextImpl value,
+          $Res Function(_$SetEmailCubitSRNavigateNextImpl) then) =
+      __$$SetEmailCubitSRNavigateNextImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SetEmailCubitSROnSRImplCopyWithImpl<$Res>
-    extends _$SetEmailCubitSRCopyWithImpl<$Res, _$SetEmailCubitSROnSRImpl>
-    implements _$$SetEmailCubitSROnSRImplCopyWith<$Res> {
-  __$$SetEmailCubitSROnSRImplCopyWithImpl(_$SetEmailCubitSROnSRImpl _value,
-      $Res Function(_$SetEmailCubitSROnSRImpl) _then)
+class __$$SetEmailCubitSRNavigateNextImplCopyWithImpl<$Res>
+    extends _$SetEmailCubitSRCopyWithImpl<$Res,
+        _$SetEmailCubitSRNavigateNextImpl>
+    implements _$$SetEmailCubitSRNavigateNextImplCopyWith<$Res> {
+  __$$SetEmailCubitSRNavigateNextImplCopyWithImpl(
+      _$SetEmailCubitSRNavigateNextImpl _value,
+      $Res Function(_$SetEmailCubitSRNavigateNextImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SetEmailCubitSROnSRImpl implements _SetEmailCubitSROnSR {
-  const _$SetEmailCubitSROnSRImpl();
+class _$SetEmailCubitSRNavigateNextImpl
+    implements _SetEmailCubitSRNavigateNext {
+  const _$SetEmailCubitSRNavigateNextImpl();
 
   @override
   String toString() {
-    return 'SetEmailCubitSR.onSR()';
+    return 'SetEmailCubitSR.navigateNext()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SetEmailCubitSROnSRImpl);
+            other is _$SetEmailCubitSRNavigateNextImpl);
   }
 
   @override
@@ -107,27 +111,27 @@ class _$SetEmailCubitSROnSRImpl implements _SetEmailCubitSROnSR {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onSR,
+    required TResult Function() navigateNext,
   }) {
-    return onSR();
+    return navigateNext();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onSR,
+    TResult? Function()? navigateNext,
   }) {
-    return onSR?.call();
+    return navigateNext?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onSR,
+    TResult Function()? navigateNext,
     required TResult orElse(),
   }) {
-    if (onSR != null) {
-      return onSR();
+    if (navigateNext != null) {
+      return navigateNext();
     }
     return orElse();
   }
@@ -135,34 +139,35 @@ class _$SetEmailCubitSROnSRImpl implements _SetEmailCubitSROnSR {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SetEmailCubitSROnSR value) onSR,
+    required TResult Function(_SetEmailCubitSRNavigateNext value) navigateNext,
   }) {
-    return onSR(this);
+    return navigateNext(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SetEmailCubitSROnSR value)? onSR,
+    TResult? Function(_SetEmailCubitSRNavigateNext value)? navigateNext,
   }) {
-    return onSR?.call(this);
+    return navigateNext?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SetEmailCubitSROnSR value)? onSR,
+    TResult Function(_SetEmailCubitSRNavigateNext value)? navigateNext,
     required TResult orElse(),
   }) {
-    if (onSR != null) {
-      return onSR(this);
+    if (navigateNext != null) {
+      return navigateNext(this);
     }
     return orElse();
   }
 }
 
-abstract class _SetEmailCubitSROnSR implements SetEmailCubitSR {
-  const factory _SetEmailCubitSROnSR() = _$SetEmailCubitSROnSRImpl;
+abstract class _SetEmailCubitSRNavigateNext implements SetEmailCubitSR {
+  const factory _SetEmailCubitSRNavigateNext() =
+      _$SetEmailCubitSRNavigateNextImpl;
 }
 
 /// @nodoc

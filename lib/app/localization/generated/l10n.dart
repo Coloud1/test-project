@@ -260,11 +260,101 @@ class S {
     );
   }
 
+  /// `Confirm password`
+  String get registrationConfirmPasswordFieldLabel {
+    return Intl.message(
+      'Confirm password',
+      name: 'registrationConfirmPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create account`
   String get registrationCreateAccountButtonLabel {
     return Intl.message(
       'Create account',
       name: 'registrationCreateAccountButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set email`
+  String get homeSetEmailAppBarTitle {
+    return Intl.message(
+      'Set email',
+      name: 'homeSetEmailAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get homeSetEmailTextFieldEmailLabel {
+    return Intl.message(
+      'Email',
+      name: 'homeSetEmailTextFieldEmailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get homeSetEmailTextFieldPasswordLabel {
+    return Intl.message(
+      'Password',
+      name: 'homeSetEmailTextFieldPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get homeSetEmailTextFieldConfirmPasswordLabel {
+    return Intl.message(
+      'Confirm password',
+      name: 'homeSetEmailTextFieldConfirmPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get homeSetEmailVerifyButtonLabel {
+    return Intl.message(
+      'Verify',
+      name: 'homeSetEmailVerifyButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set your Name`
+  String get homeSetNameAppBarTitle {
+    return Intl.message(
+      'Set your Name',
+      name: 'homeSetNameAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Display name`
+  String get homeSetNameTextFieldDisplayNameLabel {
+    return Intl.message(
+      'Display name',
+      name: 'homeSetNameTextFieldDisplayNameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set new name`
+  String get homeSetNameButtonLabel {
+    return Intl.message(
+      'Set new name',
+      name: 'homeSetNameButtonLabel',
       desc: '',
       args: [],
     );
