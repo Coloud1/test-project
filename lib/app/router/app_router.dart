@@ -6,12 +6,16 @@ import 'package:test_prj_ivan/app/router/go_router_wrapper.dart';
 import 'package:test_prj_ivan/app/router/guards/base_guard.dart';
 import 'package:test_prj_ivan/core/di/services.dart';
 import 'package:test_prj_ivan/presentation/screens/home/home_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/home/home_with_scaffold.dart';
 import 'package:test_prj_ivan/presentation/screens/login/login/login_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_email/set_email_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_name/set_name_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_otp/phone_otp_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/phone/phone_screen/phone_screen.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/registration_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/settings/main/settings_main_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/settings/providers/account_providers_screen.dart';
+import 'package:test_prj_ivan/presentation/screens/unknown/unknown_screen.dart';
 
 //{imports end}
 
@@ -49,7 +53,7 @@ class AppRouter {
       initialLocation: initialLocation ?? _initialLocation,
       refreshListenable: sessionService(),
       redirect: _globalGuard.makeRedirect,
-      routes: <GoRoute>[
+      routes: <RouteBase>[
         GoRouterWrapper(
           path: AppRoute.login.routePath,
           name: AppRoute.login.name,
@@ -84,13 +88,51 @@ class AppRouter {
           name: AppRoute.homeSetEmail.name,
           builder: (context, state) => const SetEmailScreen(),
         ),
-        GoRouterWrapper(
-          path: AppRoute.home.routePath,
-          name: AppRoute.home.name,
-          builder: (context, state) => const HomeScreen(),
-          baseGuard: _guards[AppRoute.home],
-        ),
+
         //{routes end}
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, shell) {
+            return HomeWithScaffold(shell: shell);
+          },
+          // parentNavigatorKey: _homeTabBarKey,
+          branches: [
+            StatefulShellBranch(
+              routes: [
+                GoRouterWrapper(
+                  path: AppRoute.home.routePath,
+                  name: AppRoute.home.name,
+                  builder: (context, state) => const HomeScreen(),
+                  baseGuard: _guards[AppRoute.home],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                GoRouterWrapper(
+                  path: AppRoute.unknown.routePath,
+                  name: AppRoute.unknown.name,
+                  builder: (context, state) => const UnknownScreen(),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                GoRouterWrapper(
+                  path: AppRoute.settings.routePath,
+                  name: AppRoute.settings.name,
+                  builder: (context, state) => const SettingsMainScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
+        GoRoute(
+          path: AppRoute.settingsAccountProviders.routePath,
+          name: AppRoute.settingsAccountProviders.name,
+          builder: (context, state) {
+            return const AccountProvidersScreen();
+          },
+        ),
       ],
     );
   }

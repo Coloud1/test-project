@@ -10,6 +10,7 @@ class ScaffoldWrapper extends StatelessWidget {
   final bool? resizeToAvoidBottomInset;
   final bool maintainBottomViewPadding;
   final bool extendBodyBehindAppBar;
+  final Widget? bottomNavigationBar;
 
   const ScaffoldWrapper({
     required this.body,
@@ -19,6 +20,7 @@ class ScaffoldWrapper extends StatelessWidget {
     this.resizeToAvoidBottomInset,
     this.maintainBottomViewPadding = false,
     this.extendBodyBehindAppBar = false,
+    this.bottomNavigationBar,
     super.key,
   });
 
@@ -47,6 +49,7 @@ class ScaffoldWrapper extends StatelessWidget {
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }
