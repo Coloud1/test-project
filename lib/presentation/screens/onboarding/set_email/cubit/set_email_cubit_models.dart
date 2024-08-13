@@ -4,7 +4,7 @@ part 'set_email_cubit_models.freezed.dart';
 
 @freezed
 class SetEmailCubitSR with _$SetEmailCubitSR {
-  const factory SetEmailCubitSR.onSR() = _SetEmailCubitSROnSR;
+  const factory SetEmailCubitSR.navigateNext() = _SetEmailCubitSRNavigateNext;
 }
 
 @freezed

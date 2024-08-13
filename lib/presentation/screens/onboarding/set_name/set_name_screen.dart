@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_prj_ivan/app/router/app_route.dart';
+import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
 import 'package:test_prj_ivan/app/util/validators/display_name_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
@@ -42,7 +43,7 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
   Widget buildWidget(BuildContext context) {
     return ScaffoldWrapper(
       appBar: CustomAppBar(
-        title: 'Set your Name',
+        title: context.tr.homeSetNameAppBarTitle,
         actions: [
           IconButton(
             onPressed: () => _makeLogOut(context),
@@ -58,7 +59,7 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
           const SizedBox(height: 40),
           CustomTextField(
             controller: _displayNameController,
-            hintText: 'Display name',
+            hintText: context.tr.homeSetNameTextFieldDisplayNameLabel,
             validator: (name) => _displayNameValidator.validate(
               context,
               value: name,
@@ -69,7 +70,9 @@ class _SetNameScreenState extends BaseCubitState<SetNameCubitScreenState,
           const Spacer(),
           ElevatedButton(
             onPressed: () => _updateDisplayName(context),
-            child: const Text('Set new name'),
+            child: Text(
+              context.tr.homeSetNameButtonLabel,
+            ),
           ),
           const SizedBox(height: 100),
         ],

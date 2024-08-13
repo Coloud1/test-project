@@ -18,19 +18,29 @@ class PasswordValidator implements BaseValidator {
     }
 
     return null;
+  }
 
-    // if (!Constants.passwordUpperCaseRegExp.hasMatch(value)) {
-    //   return 'Password must contain at least one uppercase character';
-    // }
-    //
-    // if (!Constants.passwordLowerCaseRegExp.hasMatch(value)) {
-    //   return 'Password must contain at least one lowercase character';
-    // }
-    //
-    // if (!Constants.passwordSpecialCharactersRegExp.hasMatch(value)) {
-    //   return 'Password must contain at least one special symbol';
-    // }
-    //
-    // return null;
+  String? validateBothPasswords(
+    BuildContext context, {
+    required bool isConfirmPassword,
+    required String? currentPassword,
+    required String? confirmPassword,
+  }) {
+    final currentPasswordError = validate(context, value: currentPassword);
+    final confirmPasswordError = validate(context, value: confirmPassword);
+
+    if (currentPasswordError != null && !isConfirmPassword) {
+      return currentPasswordError;
+    }
+
+    if (confirmPasswordError != null && isConfirmPassword) {
+      return confirmPasswordError;
+    }
+
+    if (currentPassword != confirmPassword) {
+      return isConfirmPassword ? 'Passwords need to match' : '';
+    }
+
+    return null;
   }
 }

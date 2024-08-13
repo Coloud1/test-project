@@ -50,6 +50,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Home"),
         "homeLogOutButtonLabel":
             MessageLookupByLibrary.simpleMessage("Log out"),
+        "homeSetEmailAppBarTitle":
+            MessageLookupByLibrary.simpleMessage("Set email"),
+        "homeSetEmailTextFieldConfirmPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Confirm password"),
+        "homeSetEmailTextFieldEmailLabel":
+            MessageLookupByLibrary.simpleMessage("Email"),
+        "homeSetEmailTextFieldPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Password"),
+        "homeSetEmailVerifyButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Verify"),
+        "homeSetNameAppBarTitle":
+            MessageLookupByLibrary.simpleMessage("Set your Name"),
+        "homeSetNameButtonLabel":
+            MessageLookupByLibrary.simpleMessage("Set new name"),
+        "homeSetNameTextFieldDisplayNameLabel":
+            MessageLookupByLibrary.simpleMessage("Display name"),
         "loginAppBarTitle": MessageLookupByLibrary.simpleMessage("Login"),
         "loginAppleIdButtonLabel":
             MessageLookupByLibrary.simpleMessage("Apple Id"),
@@ -73,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send SMS"),
         "registrationAppBarTitle":
             MessageLookupByLibrary.simpleMessage("Registration"),
+        "registrationConfirmPasswordFieldLabel":
+            MessageLookupByLibrary.simpleMessage("Confirm password"),
         "registrationCreateAccountButtonLabel":
             MessageLookupByLibrary.simpleMessage("Create account"),
         "registrationEmailFieldLabel":

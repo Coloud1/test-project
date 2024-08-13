@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
@@ -26,6 +27,8 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
     RegistrationBloc, RegistrationBlocSR, RegistrationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
   final EmailValidator _emailValidator = const EmailValidator();
   final PasswordValidator _passwordValidator = const PasswordValidator(6);
@@ -54,6 +57,8 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
         children: [
           const SizedBox(height: 40),
           CustomTextField(
+            autocorrect: false,
+            enableSuggestions: false,
             controller: _emailController,
             hintText: context.tr.registrationEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,
@@ -63,22 +68,41 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
               value: email,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 20),
           CustomTextField(
             useObscure: true,
             controller: _passwordController,
             hintText: context.tr.registrationPasswordFieldLabel,
             keyboardType: TextInputType.visiblePassword,
-            validator: (password) => _passwordValidator.validate(
+            validator: (password) => _passwordValidator.validateBothPasswords(
               context,
-              value: password,
+              currentPassword: password,
+              confirmPassword: _confirmPasswordController.text,
+              isConfirmPassword: false,
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
+          CustomTextField(
+            controller: _confirmPasswordController,
+            hintText: context.tr.registrationConfirmPasswordFieldLabel,
+            autocorrect: false,
+            enableSuggestions: false,
+            keyboardType: TextInputType.visiblePassword,
+            validator: (password) => _passwordValidator.validateBothPasswords(
+              context,
+              currentPassword: _passwordController.text,
+              confirmPassword: password,
+              isConfirmPassword: true,
+            ),
+            inputFormatters: [FilteringTextInputFormatter.deny(' ')],
+            useObscure: true,
+          ),
+          const Spacer(),
           ElevatedButton(
             onPressed: () => _onCreateAccount(context),
             child: Text(context.tr.registrationCreateAccountButtonLabel),
           ),
+          const SizedBox(height: 100),
         ],
       ),
     );
@@ -88,6 +112,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -108,7 +133,7 @@ class _RegistrationScreenState extends BaseState<RegistrationBlocScreenState,
 
   void _onFailure(BuildContext context, Failure failure) {
     if (failure is FirebaseAuthFailure) {
-      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
+      FirebaseAuthDialogUtil.showFirebaseAuthFailure(context, failure: failure);
     }
   }
 }

@@ -4,10 +4,12 @@ import 'package:get_it/get_it.dart';
 import 'package:test_prj_ivan/app/service/auth_service.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
 import 'package:test_prj_ivan/domain/repository/registration_repository.dart';
+import 'package:test_prj_ivan/domain/repository/user_repository.dart';
 import 'package:test_prj_ivan/domain/usecase/create_account_with_credentials_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/make_login_with_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/user/update_display_name_use_case.dart';
+import 'package:test_prj_ivan/domain/usecase/user_provider_data/link_account_with_credentials_use_case.dart';
 
 void registerUseCases(GetIt getIt) {
   getIt
@@ -29,6 +31,11 @@ void registerUseCases(GetIt getIt) {
     ..registerLazySingleton<FirebaseLogoutUseCase>(
       () => FirebaseLogoutUseCase(
         userService: getIt.get<UserService>(),
+      ),
+    )
+    ..registerLazySingleton<LinkAccountWithCredentialsUseCase>(
+      () => LinkAccountWithCredentialsUseCase(
+        userRepository: getIt.get<UserRepository>(),
       ),
     );
 }

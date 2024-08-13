@@ -55,6 +55,8 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
         children: [
           const SizedBox(height: 40),
           CustomTextField(
+            enableSuggestions: false,
+            autocorrect: false,
             controller: _emailController,
             hintText: context.tr.loginEmailFieldLabel,
             keyboardType: TextInputType.emailAddress,
@@ -141,7 +143,7 @@ class _LoginScreenState extends BaseState<LoginBlocScreenState, LoginBloc,
 
   void _onFailure(BuildContext context, Failure failure) {
     if (failure is FirebaseAuthFailure) {
-      FirebaseAuthDialogUtil.showAuthError(context, failure: failure);
+      FirebaseAuthDialogUtil.showFirebaseAuthFailure(context, failure: failure);
     }
   }
 

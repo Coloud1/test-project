@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/domain/entity/user/user_changes.dart';
@@ -9,6 +10,12 @@ abstract interface class UserRepository {
   Future<Result<UserEntity>> getUser();
 
   Future<Result<OperationStatus>> updateUser({String? displayName});
+
+  Future<Result<OperationStatus>> linkWithAccountCredential(
+    AuthCredential credential,
+  );
+
+  Future<Result<OperationStatus>> unlinkProvider(String providerId);
 
   Future<Result<OperationStatus>> deleteUser();
 
