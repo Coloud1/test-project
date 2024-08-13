@@ -9,7 +9,10 @@ enum AppRoute {
   loginPhoneOtp('phone-otp', location: AppRouteLocation.auth),
   homeSetName('/set-name'),
   homeSetEmail('/set-email'),
-  home('/home');
+  home('/home'),
+  unknown('/unknown'),
+  settings('/setting'),
+  settingsAccountProviders('/account-providers');
 //{routes declaration end}
 
   final String routePath;
