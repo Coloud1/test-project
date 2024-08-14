@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test_prj_ivan/app/service/image_picker_service.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
@@ -54,13 +52,7 @@ class SettingsCubit
 
     await result.when(
       success: (file) async {
-        if (file != null) {
-          final task = await FirebaseStorage.instance
-              .ref('avatars/${file.name}')
-              .putFile(File(file.path));
-
-          print(task.metadata?.fullPath);
-        }
+        // TODO(Ivan Modlo):
       },
       error: (failure) {},
     );

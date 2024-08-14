@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test_prj_ivan/app/util/map_firebase_auth_exception.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/core/arch/logger/app_logger_impl.dart';
+import 'package:test_prj_ivan/data/mapper/firebase/firebase_error_mapper.dart';
 import 'package:test_prj_ivan/domain/entity/failure/general/unknown_failure.dart';
 import 'package:test_prj_ivan/domain/repository/registration_repository.dart';
 
@@ -29,7 +29,7 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
         reason: 'createAccountWithCredentials',
       );
       return Result.error(
-        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+        failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));

@@ -8,7 +8,7 @@ import 'package:test_prj_ivan/app/util/validators/email_validator.dart';
 import 'package:test_prj_ivan/app/util/validators/password_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_bloc_state.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/failure/failure.dart';
-import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/usecase/create_account_with_credentials_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/registration/bloc/registration_bloc_imports.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_app_bar.dart';

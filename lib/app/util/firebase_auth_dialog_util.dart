@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:test_prj_ivan/app/util/app_dialog_util.dart';
 import 'package:test_prj_ivan/app/util/extension/context_extension.dart';
-import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_auth_failure.dart';
 
 final class FirebaseAuthDialogUtil {
   static void showFirebaseAuthFailure(

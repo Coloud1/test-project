@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test_prj_ivan/app/util/map_firebase_auth_exception.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/core/arch/logger/app_logger_impl.dart';
+import 'package:test_prj_ivan/data/mapper/firebase/firebase_error_mapper.dart';
 import 'package:test_prj_ivan/data/mapper/user/user_mapper.dart';
-import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/entity/failure/general/unknown_failure.dart';
 import 'package:test_prj_ivan/domain/entity/failure/user_failure/user_failure.dart';
 import 'package:test_prj_ivan/domain/entity/user/user_changes.dart';
@@ -27,9 +27,6 @@ class UserRepositoryImpl implements UserRepository {
 
   void _initListener() {
     _innerStream = _auth.userChanges().map<UserChanges>((user) {
-      print(user?.providerData);
-      print(user?.metadata);
-
       if (user == null) {
         return const AuthorizedUserSignedOut();
       } else {
@@ -83,7 +80,7 @@ class UserRepositoryImpl implements UserRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'deleteUser');
       return Result.error(
-        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+        failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(e),
       );
     } catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'deleteUser');
@@ -99,7 +96,7 @@ class UserRepositoryImpl implements UserRepository {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signOut');
       return Result.error(
-        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+        failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(e),
       );
     } catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'signOut');

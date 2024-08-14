@@ -8,15 +8,19 @@ import 'package:test_prj_ivan/domain/entity/failure/image_picker_failure/image_p
 class ImagePickerService {
   final ImagePicker _imagePicker;
 
-  ImagePickerService({required ImagePicker imagePicker})
-      : _imagePicker = imagePicker;
+  const ImagePickerService({
+    required ImagePicker imagePicker,
+  }) : _imagePicker = imagePicker;
 
-  Future<Result<XFile?>> pickImage(ImageSource source) async {
+  Future<Result<XFile?>> pickImage(
+    ImageSource source, {
+    Size? resizeTo,
+  }) async {
     try {
       final imageResult = await _imagePicker.pickImage(
         source: source,
-        maxHeight: 512,
-        maxWidth: 512,
+        maxHeight: resizeTo?.height ?? 512,
+        maxWidth: resizeTo?.width ?? 512,
       );
       return Result.success(imageResult);
     } on PlatformException catch (e, s) {

@@ -9,7 +9,7 @@ import 'package:test_prj_ivan/app/util/firebase_auth_dialog_util.dart';
 import 'package:test_prj_ivan/app/util/validators/email_validator.dart';
 import 'package:test_prj_ivan/app/util/validators/password_validator.dart';
 import 'package:test_prj_ivan/core/arch/bloc/base_cubit_state.dart';
-import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_auth_failure.dart';
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/domain/usecase/user_provider_data/link_account_with_credentials_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/onboarding/set_email/cubit/set_email_cubit_imports.dart';
