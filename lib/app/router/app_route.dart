@@ -12,7 +12,7 @@ enum AppRoute {
   home('/home'),
   unknown('/unknown'),
   settings('/setting'),
-  settingsAccountProviders('/account-providers');
+  settingsAccountProviders('account-providers');
 //{routes declaration end}
 
   final String routePath;

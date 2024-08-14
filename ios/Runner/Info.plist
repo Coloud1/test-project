@@ -50,6 +50,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Some text here</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Some text here</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Some text here</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UISupportedInterfaceOrientations</key>
