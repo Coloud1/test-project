@@ -26,14 +26,7 @@ class UserService {
   }
 
   void _init() {
-    _streamController = StreamController.broadcast(
-      onListen: () async {
-        final result = await _userRepository.getUser();
-        if (result.success) {
-          _streamController.add(result.data);
-        }
-      },
-    );
+    _streamController = StreamController.broadcast();
 
     _userSubscription = _userRepository.stream.listen(
       (state) {

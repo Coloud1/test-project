@@ -23,12 +23,18 @@ class HomeBloc
     _init();
   }
 
-  void _init() {
+  Future<void> _init() async {
     _subscription = _userService.getStream().listen(
           (user) => add(
             HomeBlocEvent.updateUser(user),
           ),
         );
+
+    final result = await _userService.getUser();
+
+    if (result.success) {
+      add(HomeBlocEvent.updateUser(result.data));
+    }
   }
 
   Future<void> _onGetUser() async {

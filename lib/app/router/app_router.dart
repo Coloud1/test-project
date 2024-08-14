@@ -121,17 +121,19 @@ class AppRouter {
                   path: AppRoute.settings.routePath,
                   name: AppRoute.settings.name,
                   builder: (context, state) => const SettingsMainScreen(),
+                  routes: [
+                    GoRoute(
+                      path: AppRoute.settingsAccountProviders.routePath,
+                      name: AppRoute.settingsAccountProviders.name,
+                      builder: (context, state) {
+                        return const AccountProvidersScreen();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
-        ),
-        GoRoute(
-          path: AppRoute.settingsAccountProviders.routePath,
-          name: AppRoute.settingsAccountProviders.name,
-          builder: (context, state) {
-            return const AccountProvidersScreen();
-          },
         ),
       ],
     );

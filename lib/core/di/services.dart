@@ -2,8 +2,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:test_prj_ivan/app/service/app_service.dart';
 import 'package:test_prj_ivan/app/service/auth_service.dart';
+import 'package:test_prj_ivan/app/service/image_picker_service.dart';
 import 'package:test_prj_ivan/app/service/phone_auth_service.dart';
 import 'package:test_prj_ivan/app/service/session_service/session_service.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
@@ -33,6 +35,11 @@ void registerAppServices(GetIt getIt) {
       () => PhoneAuthService(
         auth: FirebaseAuth.instance,
         authService: getIt.get<AuthService>(),
+      ),
+    )
+    ..registerFactory<ImagePickerService>(
+      () => ImagePickerService(
+        imagePicker: ImagePicker(),
       ),
     );
 }

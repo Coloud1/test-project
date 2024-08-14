@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:test_prj_ivan/app/router/app_route.dart';
 import 'package:test_prj_ivan/app/router/guards/base_guard.dart';
 
 class GoRouterWrapper extends GoRoute {
@@ -14,4 +15,22 @@ class GoRouterWrapper extends GoRoute {
     super.parentNavigatorKey,
     super.routes,
   }) : super(redirect: baseGuard?.makeRedirect);
+}
+
+class GoRouterWrapper2 extends GoRoute {
+  final BaseGuard? baseGuard;
+
+  GoRouterWrapper2({
+    required AppRoute appRoute,
+    this.baseGuard,
+    super.builder,
+    super.onExit,
+    super.pageBuilder,
+    super.parentNavigatorKey,
+    super.routes,
+  }) : super(
+          redirect: baseGuard?.makeRedirect,
+          path: appRoute.routePath,
+          name: appRoute.name,
+        );
 }
