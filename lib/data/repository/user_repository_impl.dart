@@ -55,15 +55,35 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Result<OperationStatus>> updateUser({String? displayName}) async {
+  Future<Result<OperationStatus>> updateDisplayName({
+    String? displayName,
+  }) async {
     try {
       await _auth.currentUser?.updateProfile(displayName: displayName);
       return const Result.success(OperationStatus.success);
     } on FirebaseAuthException catch (e, s) {
-      logger.crash(error: e, stackTrace: s, reason: 'updateUser');
+      logger.crash(error: e, stackTrace: s, reason: 'updateDisplayName');
       return Result.error(failure: UnknownFailure(e, s));
     } catch (e, s) {
-      logger.crash(error: e, stackTrace: s, reason: 'updateUser');
+      logger.crash(error: e, stackTrace: s, reason: 'updateDisplayName');
+      return Result.error(failure: UnknownFailure(e, s));
+    }
+  }
+
+  @override
+  Future<Result<OperationStatus>> updatePhotoURL({
+    required String photoURL,
+  }) async {
+    try {
+      await _auth.currentUser?.updatePhotoURL(photoURL);
+      return const Result.success(OperationStatus.success);
+    } on FirebaseAuthException catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'updatePhotoURL');
+      return Result.error(
+        failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(e),
+      );
+    } catch (e, s) {
+      logger.crash(error: e, stackTrace: s, reason: 'updatePhotoURL');
       return Result.error(failure: UnknownFailure(e, s));
     }
   }

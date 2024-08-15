@@ -9,7 +9,13 @@ class FileStorageEntity with _$FileStorageEntity {
     required String fileName,
   }) = _FileStorageEntity;
 
-  String get photosRef => 'photos/${fileName.toLowerCase()}';
+  String get photosRef => 'photos';
+
+  FileStorageEntity updateFileName(String newName) {
+    final path = fullPath.split('/').last;
+    final type = path.split('.').last;
+    return copyWith(fileName: '$newName.$type');
+  }
 
   const FileStorageEntity._();
 }

@@ -1,19 +1,15 @@
 import 'package:test_prj_ivan/core/arch/domain/entity/failure/failure.dart';
 
-class ImagePickerFailure implements FeatureFailure {
+sealed class ImagePickerFailure implements FeatureFailure {
   const ImagePickerFailure();
 }
 
-class ImagePickerCameraAccessRestricted extends ImagePickerFailure {
-  const ImagePickerCameraAccessRestricted();
+class ImagePickerPermissionDenied extends ImagePickerFailure {
+  const ImagePickerPermissionDenied();
 }
 
-class ImagePickerCameraAccessDenied extends ImagePickerFailure {
-  const ImagePickerCameraAccessDenied();
-}
-
-class ImagePickerPhotoAccessDenied extends ImagePickerFailure {
-  const ImagePickerPhotoAccessDenied();
+class ImagePickerCancelled extends ImagePickerFailure {
+  const ImagePickerCancelled();
 }
 
 class ImagePickerUnknown extends ImagePickerFailure {

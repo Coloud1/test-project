@@ -1,6 +1,6 @@
 import 'package:test_prj_ivan/domain/entity/failure/general/firebase_failure.dart';
 
-base class FirebaseAuthFailure extends FirebaseFailure {
+sealed class FirebaseAuthFailure extends FirebaseFailure {
   const FirebaseAuthFailure(super.message);
 }
 

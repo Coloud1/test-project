@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:test_prj_ivan/app/util/firebase_consts/firebase_auth_error_codes.dart';
 import 'package:test_prj_ivan/app/util/firebase_consts/firebase_storage_error_codes.dart';
 import 'package:test_prj_ivan/core/arch/domain/common/converter/mapper.dart';
@@ -8,7 +7,7 @@ import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_storage_fa
 
 final class FirebaseErrorMapper {
   static FirebaseStorageFailure mapFirebaseStorageExceptionToFailure(
-    PlatformException from,
+    FirebaseException from,
   ) =>
       _MapFirebaseStorageExceptionToFailure().map(from);
 
@@ -47,9 +46,9 @@ class _MapFirebaseAuthExceptionToFailure
 }
 
 class _MapFirebaseStorageExceptionToFailure
-    extends Mapper<PlatformException, FirebaseStorageFailure> {
+    extends Mapper<FirebaseException, FirebaseStorageFailure> {
   @override
-  FirebaseStorageFailure map(PlatformException from) {
+  FirebaseStorageFailure map(FirebaseException from) {
     return switch (from.code) {
       FirebaseStorageErrorCodes.objectNotFound =>
         FirebaseStorageObjectNotFoundFailure(from.message),

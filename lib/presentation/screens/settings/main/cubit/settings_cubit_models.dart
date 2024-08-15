@@ -5,7 +5,8 @@ part 'settings_cubit_models.freezed.dart';
 
 @freezed
 class SettingsCubitSR with _$SettingsCubitSR {
-  const factory SettingsCubitSR.onSR() = _SettingsCubitSROnSR;
+  const factory SettingsCubitSR.showPermissionDialog() =
+      _SettingsCubitSRShowPermissionDialog;
 }
 
 @freezed

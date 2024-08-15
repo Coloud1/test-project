@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:test_prj_ivan/presentation/widgets/custom_cached_network_image.dart';
 
 class SettingsProfile extends StatelessWidget {
@@ -7,6 +8,7 @@ class SettingsProfile extends StatelessWidget {
   final String email;
   final VoidCallback onCameraTap;
   final VoidCallback onGalleryTap;
+  final VoidCallback onDeleteTap;
 
   const SettingsProfile({
     required this.photoURL,
@@ -14,6 +16,7 @@ class SettingsProfile extends StatelessWidget {
     required this.email,
     required this.onCameraTap,
     required this.onGalleryTap,
+    required this.onDeleteTap,
     super.key,
   });
 
@@ -21,57 +24,97 @@ class SettingsProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (photoURL.isNotEmpty)
-          ClipRRect(
-            borderRadius: BorderRadius.circular(90),
-            child: CustomCachedNetworkImage(
-              imageUrl: photoURL,
-              height: 64,
-              width: 64,
-              fit: BoxFit.cover,
-              useOldImageOnUrlChange: true,
-            ),
-          )
-        else
-          const SizedBox.square(dimension: 64),
-        const SizedBox(width: 18),
         GestureDetector(
-          onTap: () => showCupertinoModalPopup(
-            context: context,
-            builder: (context) {
-              return CupertinoActionSheet(
-                title: const Text(
-                  'Do you want to set a custom profile photo for you account?',
+          onTap: () => _changePhoto(context),
+          child: photoURL.isNotEmpty
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: CustomCachedNetworkImage(
+                    imageUrl: photoURL,
+                    height: 64,
+                    width: 64,
+                    fit: BoxFit.cover,
+                    useOldImageOnUrlChange: true,
+                    placeholder: (context, v) {
+                      return Container(
+                        height: 64,
+                        width: 64,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.person),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Container(
+                  height: 64,
+                  width: 64,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.withOpacity(0.8),
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.person),
+                  ),
                 ),
-                actions: [
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      onCameraTap();
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Open Camera'),
-                  ),
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      onGalleryTap();
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Open Gallery'),
-                  ),
-                ],
-              );
-            },
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(displayName),
-              const SizedBox(height: 4),
-              Text(email),
-            ],
-          ),
+        ),
+        const SizedBox(width: 18),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(displayName),
+            const SizedBox(height: 4),
+            Text(email),
+          ],
         ),
       ],
+    );
+  }
+
+  void _changePhoto(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          title: Text(
+            photoURL.isEmpty
+                ? 'Do you want to set a custom profile photo for your account?'
+                : 'Do you want to change a profile photo for your account?',
+          ),
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () {
+                onCameraTap();
+                Navigator.pop(context);
+              },
+              child: const Text('Open Camera'),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                onGalleryTap();
+                Navigator.pop(context);
+              },
+              child: const Text('Open Gallery'),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                onDeleteTap();
+                Navigator.pop(context);
+              },
+              isDestructiveAction: true,
+              child: const Text('Delete photo'),
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+        );
+      },
     );
   }
 }

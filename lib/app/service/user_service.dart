@@ -35,7 +35,6 @@ class UserService {
           _streamController.add(state.user);
           _sessionService.openSession();
         } else {
-          _storedUser = null;
           _sessionService.closeSession();
         }
       },
@@ -53,8 +52,19 @@ class UserService {
     return _userRepository.getUser();
   }
 
-  Future<Result<OperationStatus>> updateUser({String? displayName}) {
-    return _userRepository.updateUser(displayName: displayName);
+  Future<Result<OperationStatus>> updateUser({
+    String? displayName,
+    String? photoURL,
+  }) {
+    if (displayName != null) {
+      return _userRepository.updateDisplayName(displayName: displayName);
+    }
+
+    if (photoURL != null) {
+      return _userRepository.updatePhotoURL(photoURL: photoURL);
+    }
+
+    throw UnimplementedError();
   }
 
   Future<Result<OperationStatus>> logOut() async {

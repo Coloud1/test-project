@@ -12,20 +12,27 @@ class FileSourceImpl implements FileSource {
   }) : _firebaseStorage = firebaseStorage;
 
   @override
+  Future<String> getFileURL({
+    required String fileName,
+    required String collection,
+  }) async {
+    return _firebaseStorage.ref(collection).child(fileName).getDownloadURL();
+  }
+
+  @override
   Future<FullMetadata?> uploadAsFile(
     File file, {
     required String collection,
+    required String name,
   }) async {
-    final result = await _firebaseStorage.ref(collection).putFile(file);
+    final result =
+        await _firebaseStorage.ref(collection).child(name).putFile(file);
     return result.metadata;
   }
 
   @override
-  Future<OperationStatus> deleteFile({
-    required String collection,
-    required String fileName,
-  }) async {
-    await _firebaseStorage.ref(collection).child(fileName).delete();
+  Future<OperationStatus> deleteFile({required String filePath}) async {
+    await _firebaseStorage.ref().child(filePath).delete();
     return OperationStatus.success;
   }
 }

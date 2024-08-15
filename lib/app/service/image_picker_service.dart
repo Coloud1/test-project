@@ -12,7 +12,7 @@ class ImagePickerService {
     required ImagePicker imagePicker,
   }) : _imagePicker = imagePicker;
 
-  Future<Result<XFile?>> pickImage(
+  Future<Result<XFile>> pickImage(
     ImageSource source, {
     Size? resizeTo,
   }) async {
@@ -22,6 +22,11 @@ class ImagePickerService {
         maxHeight: resizeTo?.height ?? 512,
         maxWidth: resizeTo?.width ?? 512,
       );
+
+      if (imageResult == null) {
+        return const Result.error(failure: ImagePickerCancelled());
+      }
+
       return Result.success(imageResult);
     } on PlatformException catch (e, s) {
       logger.crash(
@@ -39,7 +44,7 @@ class ImagePickerService {
         reason: 'pickImage',
       );
 
-      return const Result.error(failure: ImagePickerFailure());
+      return Result.error(failure: ImagePickerUnknown(error: e.toString()));
     }
   }
 }

@@ -2,10 +2,13 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test_prj_ivan/data/repository/image_repository_impl.dart';
 import 'package:test_prj_ivan/data/repository/login_repository_impl.dart';
 import 'package:test_prj_ivan/data/repository/registration_repository_impl.dart';
 import 'package:test_prj_ivan/data/repository/user_repository_impl.dart';
+import 'package:test_prj_ivan/data/source/remote/file_source.dart';
 import 'package:test_prj_ivan/data/source/remote/login_source.dart';
+import 'package:test_prj_ivan/domain/repository/image_repository.dart';
 import 'package:test_prj_ivan/domain/repository/login_repository.dart';
 import 'package:test_prj_ivan/domain/repository/registration_repository.dart';
 import 'package:test_prj_ivan/domain/repository/user_repository.dart';
@@ -26,6 +29,11 @@ void registerRepositories(GetIt getIt) {
     ..registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(
         auth: FirebaseAuth.instance,
+      ),
+    )
+    ..registerLazySingleton<ImageRepository>(
+      () => ImageRepositoryImpl(
+        source: getIt.get<FileSource>(),
       ),
     );
 }

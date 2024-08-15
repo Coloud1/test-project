@@ -3,15 +3,14 @@ import 'package:test_prj_ivan/domain/entity/failure/image_picker_failure/image_p
 
 final class MapImagePickerErrorToFailure {
   static ImagePickerFailure mapCommonErrorToFailure(String code) {
-    return switch (code) {
-      ImagePickerErrorConsts.cameraAccessRestricted =>
-        const ImagePickerCameraAccessRestricted(),
-      ImagePickerErrorConsts.cameraAccessDenied =>
-        const ImagePickerCameraAccessDenied(),
-      ImagePickerErrorConsts.photoAccessDenied =>
-        const ImagePickerPhotoAccessDenied(),
-      _ => ImagePickerUnknown(error: code),
-    };
+    switch (code) {
+      case ImagePickerErrorConsts.photoAccessDenied:
+      case ImagePickerErrorConsts.cameraAccessDenied:
+      case ImagePickerErrorConsts.cameraAccessRestricted:
+        return const ImagePickerPermissionDenied();
+      default:
+        return ImagePickerUnknown(error: code);
+    }
   }
 
   const MapImagePickerErrorToFailure();
