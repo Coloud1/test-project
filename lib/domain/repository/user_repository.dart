@@ -9,7 +9,13 @@ abstract interface class UserRepository {
 
   Future<Result<UserEntity>> getUser();
 
-  Future<Result<OperationStatus>> updateUser({String? displayName});
+  Future<Result<OperationStatus>> updateDisplayName({
+    required String displayName,
+  });
+
+  Future<Result<OperationStatus>> updatePhotoURL({
+    required String photoURL,
+  });
 
   Future<Result<OperationStatus>> linkWithAccountCredential(
     AuthCredential credential,

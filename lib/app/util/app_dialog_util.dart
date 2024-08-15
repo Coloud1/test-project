@@ -20,5 +20,18 @@ class AppDialogUtil {
         ],
       );
 
+  static void showDialog(
+    BuildContext context, {
+    required String title,
+    required List<DialogButtonSettings> buttons,
+    String content = '',
+  }) =>
+      CustomAdaptiveDialog.show(
+        context,
+        title: title,
+        content: content,
+        buttons: buttons,
+      );
+
   const AppDialogUtil._();
 }

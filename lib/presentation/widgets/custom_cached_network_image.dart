@@ -20,6 +20,7 @@ class CustomCachedNetworkImage extends CachedNetworkImage {
     super.imageBuilder,
     super.imageRenderMethodForWeb,
     super.useOldImageOnUrlChange,
+    super.placeholder,
     super.key,
   }) : super(
           fadeInDuration: Duration.zero,

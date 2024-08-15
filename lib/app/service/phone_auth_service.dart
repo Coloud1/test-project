@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_prj_ivan/app/service/auth_service.dart';
-import 'package:test_prj_ivan/app/util/map_firebase_auth_exception.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/operation_status.dart';
 import 'package:test_prj_ivan/core/arch/domain/entity/common/result.dart';
 import 'package:test_prj_ivan/core/arch/logger/app_logger_impl.dart';
+import 'package:test_prj_ivan/data/mapper/firebase/firebase_error_mapper.dart';
 import 'package:test_prj_ivan/domain/data_objects/phone_auth_event.dart';
 import 'package:test_prj_ivan/domain/entity/failure/general/unknown_failure.dart';
 import 'package:test_prj_ivan/domain/params/login/login_params.dart';
@@ -50,8 +50,9 @@ class PhoneAuthService {
         verificationFailed: (exception) {
           _streamController.add(
             PhoneAuthEventVerificationFailed(
-              failure:
-                  MapFirebaseAuthException.mapRawStringToFailure(exception),
+              failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(
+                exception,
+              ),
               phoneNumber: phoneNumber,
             ),
           );
@@ -82,7 +83,7 @@ class PhoneAuthService {
     } on FirebaseAuthException catch (e, s) {
       logger.crash(error: e, stackTrace: s, reason: 'verifyPhoneNumber');
       return Result.error(
-        failure: MapFirebaseAuthException.mapRawStringToFailure(e),
+        failure: FirebaseErrorMapper.mapFirebaseAuthExceptionToFailure(e),
       );
     } catch (e, s) {
       return Result.error(failure: UnknownFailure(e, s));

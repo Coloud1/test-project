@@ -1,4 +1,4 @@
-import 'package:test_prj_ivan/domain/entity/failure/firebase_auth_failure/firebase_auth_failure.dart';
+import 'package:test_prj_ivan/domain/entity/failure/firebase/firebase_auth_failure.dart';
 
 sealed class PhoneAuthEvent {
   final String phoneNumber;

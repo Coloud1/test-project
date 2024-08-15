@@ -18,33 +18,36 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsCubitSR {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onSR,
+    required TResult Function() showPermissionDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onSR,
+    TResult? Function()? showPermissionDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onSR,
+    TResult Function()? showPermissionDialog,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SettingsCubitSROnSR value) onSR,
+    required TResult Function(_SettingsCubitSRShowPermissionDialog value)
+        showPermissionDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SettingsCubitSROnSR value)? onSR,
+    TResult? Function(_SettingsCubitSRShowPermissionDialog value)?
+        showPermissionDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SettingsCubitSROnSR value)? onSR,
+    TResult Function(_SettingsCubitSRShowPermissionDialog value)?
+        showPermissionDialog,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,36 +72,40 @@ class _$SettingsCubitSRCopyWithImpl<$Res, $Val extends SettingsCubitSR>
 }
 
 /// @nodoc
-abstract class _$$SettingsCubitSROnSRImplCopyWith<$Res> {
-  factory _$$SettingsCubitSROnSRImplCopyWith(_$SettingsCubitSROnSRImpl value,
-          $Res Function(_$SettingsCubitSROnSRImpl) then) =
-      __$$SettingsCubitSROnSRImplCopyWithImpl<$Res>;
+abstract class _$$SettingsCubitSRShowPermissionDialogImplCopyWith<$Res> {
+  factory _$$SettingsCubitSRShowPermissionDialogImplCopyWith(
+          _$SettingsCubitSRShowPermissionDialogImpl value,
+          $Res Function(_$SettingsCubitSRShowPermissionDialogImpl) then) =
+      __$$SettingsCubitSRShowPermissionDialogImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SettingsCubitSROnSRImplCopyWithImpl<$Res>
-    extends _$SettingsCubitSRCopyWithImpl<$Res, _$SettingsCubitSROnSRImpl>
-    implements _$$SettingsCubitSROnSRImplCopyWith<$Res> {
-  __$$SettingsCubitSROnSRImplCopyWithImpl(_$SettingsCubitSROnSRImpl _value,
-      $Res Function(_$SettingsCubitSROnSRImpl) _then)
+class __$$SettingsCubitSRShowPermissionDialogImplCopyWithImpl<$Res>
+    extends _$SettingsCubitSRCopyWithImpl<$Res,
+        _$SettingsCubitSRShowPermissionDialogImpl>
+    implements _$$SettingsCubitSRShowPermissionDialogImplCopyWith<$Res> {
+  __$$SettingsCubitSRShowPermissionDialogImplCopyWithImpl(
+      _$SettingsCubitSRShowPermissionDialogImpl _value,
+      $Res Function(_$SettingsCubitSRShowPermissionDialogImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SettingsCubitSROnSRImpl implements _SettingsCubitSROnSR {
-  const _$SettingsCubitSROnSRImpl();
+class _$SettingsCubitSRShowPermissionDialogImpl
+    implements _SettingsCubitSRShowPermissionDialog {
+  const _$SettingsCubitSRShowPermissionDialogImpl();
 
   @override
   String toString() {
-    return 'SettingsCubitSR.onSR()';
+    return 'SettingsCubitSR.showPermissionDialog()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsCubitSROnSRImpl);
+            other is _$SettingsCubitSRShowPermissionDialogImpl);
   }
 
   @override
@@ -107,27 +114,27 @@ class _$SettingsCubitSROnSRImpl implements _SettingsCubitSROnSR {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onSR,
+    required TResult Function() showPermissionDialog,
   }) {
-    return onSR();
+    return showPermissionDialog();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onSR,
+    TResult? Function()? showPermissionDialog,
   }) {
-    return onSR?.call();
+    return showPermissionDialog?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onSR,
+    TResult Function()? showPermissionDialog,
     required TResult orElse(),
   }) {
-    if (onSR != null) {
-      return onSR();
+    if (showPermissionDialog != null) {
+      return showPermissionDialog();
     }
     return orElse();
   }
@@ -135,34 +142,38 @@ class _$SettingsCubitSROnSRImpl implements _SettingsCubitSROnSR {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SettingsCubitSROnSR value) onSR,
+    required TResult Function(_SettingsCubitSRShowPermissionDialog value)
+        showPermissionDialog,
   }) {
-    return onSR(this);
+    return showPermissionDialog(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SettingsCubitSROnSR value)? onSR,
+    TResult? Function(_SettingsCubitSRShowPermissionDialog value)?
+        showPermissionDialog,
   }) {
-    return onSR?.call(this);
+    return showPermissionDialog?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SettingsCubitSROnSR value)? onSR,
+    TResult Function(_SettingsCubitSRShowPermissionDialog value)?
+        showPermissionDialog,
     required TResult orElse(),
   }) {
-    if (onSR != null) {
-      return onSR(this);
+    if (showPermissionDialog != null) {
+      return showPermissionDialog(this);
     }
     return orElse();
   }
 }
 
-abstract class _SettingsCubitSROnSR implements SettingsCubitSR {
-  const factory _SettingsCubitSROnSR() = _$SettingsCubitSROnSRImpl;
+abstract class _SettingsCubitSRShowPermissionDialog implements SettingsCubitSR {
+  const factory _SettingsCubitSRShowPermissionDialog() =
+      _$SettingsCubitSRShowPermissionDialogImpl;
 }
 
 /// @nodoc
