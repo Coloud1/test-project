@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:test_prj_ivan/app/router/app_route.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
 import 'package:test_prj_ivan/app/util/app_dialog_util.dart';
@@ -13,7 +12,6 @@ import 'package:test_prj_ivan/domain/usecase/user/change_profile_photo_use_case.
 import 'package:test_prj_ivan/domain/usecase/user/firebase_logout_use_case.dart';
 import 'package:test_prj_ivan/presentation/screens/settings/main/cubit/settings_cubit_imports.dart';
 import 'package:test_prj_ivan/presentation/screens/settings/main/widgets/settings_profile.dart';
-import 'package:test_prj_ivan/presentation/widgets/custom_dialog/dialog_button_settings.dart';
 
 class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({super.key});
@@ -104,22 +102,7 @@ class _SettingsMainScreenState extends BaseCubitState<SettingsCubitScreenState,
   void _onSR(BuildContext context, SettingsCubitSR sr) {
     sr.when(
       showPermissionDialog: () {
-        AppDialogUtil.showDialog(
-          context,
-          title: "You've previously denied permission for this action.",
-          content:
-              'Would you like to revisit your settings to reconsider your permissions?',
-          buttons: [
-            const DialogButtonSettings(
-              label: 'Go to Settings',
-              onTap: openAppSettings,
-            ),
-            DialogButtonSettings(
-              label: 'Cancel',
-              onTap: () {},
-            ),
-          ],
-        );
+        AppDialogUtil.showPermissionDialog(context);
       },
     );
   }

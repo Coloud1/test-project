@@ -3,9 +3,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 import 'package:test_prj_ivan/app/service/app_service.dart';
 import 'package:test_prj_ivan/app/service/auth_service.dart';
 import 'package:test_prj_ivan/app/service/image_picker_service.dart';
+import 'package:test_prj_ivan/app/service/location_service/location_service_impl.dart';
 import 'package:test_prj_ivan/app/service/phone_auth_service.dart';
 import 'package:test_prj_ivan/app/service/session_service/session_service.dart';
 import 'package:test_prj_ivan/app/service/user_service.dart';
@@ -41,6 +43,9 @@ void registerAppServices(GetIt getIt) {
       () => ImagePickerService(
         imagePicker: ImagePicker(),
       ),
+    )
+    ..registerFactory<LocationService>(
+      () => LocationService(location: Location()),
     );
 }
 

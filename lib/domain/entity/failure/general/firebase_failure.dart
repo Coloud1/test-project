@@ -1,6 +1,6 @@
 import 'package:test_prj_ivan/core/arch/domain/entity/failure/failure.dart';
 
-base class FirebaseFailure implements FeatureFailure {
+base class FirebaseFailure implements Failure {
   final String? message;
 
   const FirebaseFailure(this.message);
